@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "news":"../../components/news/news",
+    "myvideo":"../../components/video/video"
+  },
+
+  "navigationBarTitleText": "Ryan News"
+
+  
+}

@@ -1,0 +1,55 @@
+<!--pages/home/home.wxml-->
+<view>
+ <view  >
+  <van-tabs  bind:change="onChange" swipeable="true" animated="true" >
+  <van-tab title="推荐" >
+    <view>
+        <news NewsList="{{NewsList}}" swiper="{{swiper}}" notice="{{notice}}"></news>
+        <van-divider wx:if="{{show}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+  </van-tab>
+<!--   <van-tab title="视频">
+    <myvideo videoList="{{videoList}}"></myvideo>
+  </van-tab> -->
+  <van-tab title="娱乐">
+    <view>
+        <news NewsList="{{otherList}}"  ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+  </van-tab>
+  <van-tab title="体育">
+    <view>
+        <news NewsList="{{otherList}}"  ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+</van-tab>
+<van-tab title="国际">
+  <view>
+        <news NewsList="{{otherList}}" ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+</van-tab>
+<van-tab title="科技">
+  <view>
+        <news NewsList="{{otherList}}"  ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+</van-tab>
+<van-tab title="财经">
+  <view>
+        <news NewsList="{{otherList}}" ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+</van-tab>
+<van-tab title="军事">
+  <view>
+        <news NewsList="{{otherList}}"  ></news>
+        <van-divider wx:if="{{show1}}" contentPosition="center">我也是有底线的</van-divider>
+    </view>
+</van-tab>
+</van-tabs>
+ </view>
+
+
+
+</view>

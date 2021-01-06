@@ -1,0 +1,42 @@
+/* pages/mine/mine.wxss */
+
+/* .Username{
+  font-weight: normal;
+  font-size: large;
+  margin-top: 30rpx;
+}
+.Mine_List{
+  margin-top: 10px;
+}
+.User{
+height: 88px;
+
+}
+.bottom-button {
+  width: 160px;
+  height: 40px;
+} */
+.list{
+  display: block;
+  margin-top: 20rpx 0;
+}
+.page{
+  display: block;
+  min-height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1
+}
+.avatar{
+  text-align: center;
+  margin-top: 20rpx;
+}
+.nickname{
+  text-align: center;
+  position: relative;
+  margin-top: 10rpx;
+  font-size: 40rpx;
+  font-family: Microsoft YaHei;
+}

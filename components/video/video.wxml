@@ -1,0 +1,11 @@
+<!--components/video/video.wxml-->
+<view >
+  <view wx:for="{{videoList}}"class="videoTitle"  wx:key="*this" >
+    <van-panel title="{{item.videoTitle}}" desc="{{item.videoAuthor}}  |  {{item.time}}" >
+  <view class="videoCard">
+    <video show-mute-btn="true" src="{{item.videoUrl}}">
+      </video> 
+  </view>
+</van-panel>
+</view>
+</view>

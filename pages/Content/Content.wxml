@@ -1,0 +1,77 @@
+<!--pages/Content/Content.wxml-->
+  <van-notify id="van-notify" />
+<view class="content" wx:for="{{NewsList}}"wx:key="*this">
+
+  <van-panel  use-footer-slot >
+    <view slot="header" class="header">
+      <view>
+        <div slot="desc" class="author">{{item.press}}</div>
+        <div>  | </div>
+      <div slot="status" class="status">{{item.time}} | {{item.ydNum}}阅读</div>
+      </view>
+      <view slot="title" class="title">{{item.title}}</view>
+
+    </view>
+  <view class="inner">
+    <rich-text space="ensp" nodes="{{nodes}}"></rich-text>
+    <van-divider dashed contentPosition="center">以上就是全部内容</van-divider>
+  </view>
+</van-panel>
+
+
+<view class="footer" style="backgroud-color:{{bgc}}">
+ <van-row wx:for="{{NewsList}}"wx:key="*this">
+      <van-col span="6"><van-icon size="60rpx" name="/static/good.png" info="{{item.good}}" bind:click="good" /></van-col>
+      <van-col span="6"><van-icon size="60rpx" name="/static/chat.png" info="{{pinglunList.length}}" bind:click="talk"/></van-col>
+      <van-col span="6"><van-icon size="60rpx" name="/static/collection.png"  bind:click="colleciton" /></van-col>
+      <van-col span="6"><van-icon size="60rpx" name="/static/share.png"  bind:click="share"/></van-col>
+</van-row>
+  </view>
+  <van-toast id="van-toast" />
+</view>
+
+
+<van-action-sheet show="{{ show }}" title="{{plNum}} " bind:close="onClose"   >
+
+<view wx:if="{{pinglunList==''}}" class="noChat">
+  当前还没有评论，快来留下你的神评吧
+</view>
+<view wx:for="{{pinglunList}}" wx:key="index" class="list">
+  <van-cell value="{{item.pltime}}">
+    <div  slot="icon" class="avatar"> <van-image round width="70rpx"height="70rpx"src="{{item.avatarUrl}}"/></div>
+  <view slot="title">
+    <view class="van-cell-text">{{item.nickname}}</view>
+    <van-tag plain color="#fff"><div class="pinglun">{{item.content}}</div></van-tag>
+  </view>
+</van-cell>
+
+</view>
+
+<van-button  type="default" round custom-style="width:40px;height:40px;position: fixed;right: 20rpx;bottom:10rpx" icon="comment-o" color="green" bind:click="submit"></van-button> 
+
+
+</van-action-sheet>
+
+<van-action-sheet show="{{ show1 }}" title="我的神评" bind:close="onClose">
+  <view>
+    <van-cell-group>
+  <van-field
+    model:value="{{ message  }}"
+    center
+    clearable
+    autosize= "{maxHeight: 100, minHeight: 50}"
+    type="textarea"
+    placeholder="写评论"
+    show-word-limit
+    maxlength="90"
+    border="{{ false }}"
+    use-button-slot
+  >
+    <van-button slot="button" icon="/static/push.png" size="40rpx" custom-style="float:right;width:120rpx"color="linear-gradient(to right, #4bb0ff, #6149f6)" bind:click="submitcomment"
+      >发送</van-button
+    >
+  </van-field>
+</van-cell-group>
+
+  </view>
+</van-action-sheet>

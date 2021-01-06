@@ -1,0 +1,25 @@
+<!--components/news.wxml-->
+
+  <van-notice-bar mode="closeable" text="{{notice}}" scrollable wx:if="{{notice!=null}}" />
+<swiper indicator-dots="true" circular="true" autoplay="true" interval="2500" duration="500"  indicator-color="#8799a3" indicator-active-color="#0081ff"  wx:if="{{swiper}}">
+  <swiper-item wx:for="{{swiper}}" wx:key="*this" id="{{item.newsid}}" bindtap="navigate">
+   <image mode="widthFix" src="{{item.src}}"></image>
+   <view class='swipertitle'><text>{{item.title}}</text></view>
+  </swiper-item>
+</swiper>
+
+<view  wx:for="{{NewsList||otherList}}"  bindtap="navigate" id="{{item.newsid}}"class="newslist" wx:key="index">
+  <van-card  >
+<div slot="title" class="title">{{item.title}}</div>
+<div slot="tag" class="tag" wx:if="{{item.tag!=null}}">{{item.tag}}</div>
+<view slot="desc" class="desc">{{item.inner}}"</view>
+
+<div slot="thumb" wx:if="{{item.img!=null||item.img==''}}">
+  <van-image width="90" height="100"
+  fit="cover" src="{{item.img}}" />
+  </div>
+
+<div slot="num"  class="author">{{item.press}}</div>
+</van-card>
+</view>
+

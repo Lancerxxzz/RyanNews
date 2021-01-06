@@ -1,0 +1,15 @@
+/* pages/Find/Find.wxss */
+
+page{
+  background-color: #F5F5F5;
+}
+
+
+.title{
+  float: left;
+  width: 600rpx; 
+  overflow: hidden; 
+  text-overflow:ellipsis; 
+  white-space: nowrap;
+  font-size: 30rpx;
+}

@@ -1,0 +1,95 @@
+<!--pages/Find/Find.wxml-->
+<view>
+<van-notify id="van-notify" />
+
+<van-search
+  value="{{ value }}"
+  placeholder="搜索你关心的"
+  bind:focus="onFocus"
+  shape="round"
+  bind:blur="onBlur"
+  background="#FFFFFF"
+  placeholder-style="text-align:center"
+  bind:change="onChange"
+  bind:cancel="onCancel"
+  bind:search="onSearch"
+/>
+
+
+<view wx:if="{{!show}}">
+  <view wx:for="{{result0}}" id="{{item.newsid}}" bindtap="navigatorTocontent"  wx:key="index">
+        <van-panel >
+          <view slot="header" style="height:80rpx;line-height:80rpx" >
+            <div style="float:left;margin:0 30rpx;color:#EE7942;width:30rpx" >{{index+1}}</div>
+            <div slot="title" class="title">
+                <div style="float:left;">{{item.simpletitle}}</div>
+            </div>
+            <div style="float:right;margin-right:20rpx" slot="status"></div><!-- {{item.status}} -->
+          </view>
+        </van-panel>
+    </view>
+
+</view>
+
+<view wx:if="{{show1}}">
+  <van-divider wx:if="{{show1}}" contentPosition="center" dashed  custom-style="background-color:#FFFFFF;margin:0">搜索记录</van-divider>
+  <view wx:for="{{HistoryList}}" wx:key="*this" id="{{item.newsid}}" >
+        <van-panel>
+          <view slot="header" style="height:80rpx;line-height:80rpx" >
+            <div style="float:left;margin:8rpx 30rpx;color:#EE7942;width:30rpx" ><van-icon size="40rpx" name="clock-o" /></div>
+            <div slot="title" class="title">
+                <div style="float:left;">{{item}}</div>
+                <div style="float:left;margin-left:40rpx;color:#CDC5BF"></div>
+            </div>
+            <div style="float:right;margin-right:20rpx" slot="status"></div>
+          </view>
+        </van-panel>
+    </view>
+</view>
+
+
+
+<view wx:if="{{show}}">
+  <van-tabs swipeable animated  active="{{active}}" bind:click="tabschange">
+  <van-tab title="热搜榜" name="1">
+    <van-divider contentPosition="center" dashed  custom-style="background-color:#FFFFFF;margin:0">实时热点</van-divider>
+    <view wx:for="{{result1}}"  id="{{item.newsid}}" bindtap="navigatorTocontent" wx:key="index">
+        <van-panel>
+          <view slot="header" style="height:80rpx;line-height:80rpx;" >
+            <div style="float:left;margin:0 20rpx;color:#EE7942;width:20rpx" >{{index+1}}</div>
+            <div slot="title" class="title">
+                <div style="float:left;">{{item.simpletitle}}</div>
+                <div style="float:left;margin-left:30rpx;color:#CDC5BF">{{item.ydNum}}</div>
+            </div>
+            <div style="float:right;margin-right:20rpx" slot="status"  >
+              <van-tag wx:if="{{item.status==0}}"></van-tag>
+              <van-tag wx:if="{{item.status==1}}" type="danger ">热</van-tag>
+              <van-tag wx:if="{{item.status==2}}" type="primary">新</van-tag>
+            </div>
+          </view>
+        </van-panel>
+    </view>
+  </van-tab>
+  <van-tab title="话题榜" name="2">
+    <van-divider contentPosition="center" dashed  custom-style="background-color:#FFFFFF;margin:0">实时话题榜</van-divider>
+    <view wx:for="{{result2}}"   id="{{item.newsid}}" bindtap="navigatorTocontent" wx:key="index">
+        <van-panel  >
+          <view slot="header" style="height:80rpx;line-height:80rpx" >
+            <div style="float:left;margin:0 20rpx;color:#EE7942;width:20rpx" >{{index+1}}</div>
+            <div slot="title" class="title"  >
+                <div style="float:left;">{{item.simpletitle}}</div>
+                <div style="float:left;margin-left:40rpx;color:#CDC5BF">{{item.good}}</div>
+            </div>
+            <div style="float:right;margin-right:20rpx" slot="status">
+              <van-tag wx:if="{{item.status==0}}"></van-tag>
+              <van-tag wx:if="{{item.status==1}}" type="danger ">热</van-tag>
+              <van-tag wx:if="{{item.status==2}}" type="primary">新</van-tag>
+            </div>
+          </view>
+        </van-panel>
+    </view>
+  </van-tab>
+</van-tabs>
+</view>
+<van-button  wx:if="{{show}}" type="default"  round custom-style="z-index: 999;width: 44px; position: absolute;right: 0;bottom:10rpx" icon="replay" bind:click="refresh"></van-button>
+</view>

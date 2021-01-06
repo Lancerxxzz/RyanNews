@@ -1,0 +1,8 @@
+<!--logs.wxml-->
+<view >
+  <van-cell  title="名字"  size="large" value="{{userInfo.nickName}}" />
+ <!--  <van-cell  title="个性签名" bind:click="change" is-link size="large" value="{{desc}}" /> -->
+  <van-cell  title="城市" size="large" value="{{userInfo.city}}" />
+  <van-cell  title="省份"  size="large" value="{{userInfo.province}}" />
+  <van-cell  title="关于RyanNews" size="large"  value="版本2.1.1" />
+</view>

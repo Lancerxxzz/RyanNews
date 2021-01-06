@@ -1,0 +1,85 @@
+/* pages/Content/Content.wxss */
+.content {
+  padding: 30rpx;
+  width: 100%;
+  height: 100%;
+}
+
+.author {
+  font-weight: bold;
+}
+
+.header {
+  position: relative;
+}
+
+.status {
+  color: #8B8989;
+}
+
+.author,
+.status {
+  font-size: small;
+  margin-top: 40rpx;
+}
+
+.title {
+  font-size: 52rpx;
+  font-weight: bold;
+  margin-top: 70rpx;
+}
+
+.inner {
+  margin-top: 90rpx;
+}
+
+.img{
+ text-align: center;
+ margin-bottom: 20rpx;
+}
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  background-color: #fff;
+  padding-top: 8px;
+}
+.content-picture,.img{
+  width: 700rpx;
+  height: auto;
+}
+.pinglun{
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+  width: 68vw;
+  color: #8B8989;
+}
+.pop{
+  z-index: 999;
+}
+.one-p{
+  margin-bottom: 28rpx;
+}
+.desc,.ql-align-center{
+color:#979797;
+font-size:25rpx;
+text-align: center;
+display: block;
+}
+.avatar{
+  margin-right: 20rpx;
+}
+.list{
+  display: block;
+}
+.noChat{
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+}

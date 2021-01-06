@@ -1,0 +1,33 @@
+<!--pages/mine/mine.wxml-->
+ <view > 
+  <van-notify id="van-notify" />
+  <view wx:if="{{!hasUserInfo && canIUse}}">
+  <view class="avatar">
+    <van-image round fit="fill"width="88" height="88"src=""/>
+  </view>
+  <view class="userinfo" >
+    <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+</view>
+</view>
+
+<view wx:if="{{show}}">
+  <view class="avatar">
+    <van-image round fit="fill"width="88" height="88"src="{{avatarUrl}}"/>
+  </view>
+  <view class="nickname">{{nickName}}</view>
+</view>
+
+
+
+<van-cell title="我的收藏"  size="large" is-link bind:click="collection" icon="/static/collection.png" />
+<van-cell title="浏览记录" size="large"  is-link bind:click="history" icon="/static/history.png" />
+<van-cell title="主题皮肤"  size="large" is-link bind:click="theme"  icon="/static/theme.png" />
+<van-cell title="设置"   size="large"  is-link bind:click="settings" icon="/static/setting.png"/>
+
+
+
+
+
+</view>
+
+

@@ -1,0 +1,75 @@
+{
+  "pages": [ 
+    "pages/home/home",
+    "pages/Find/Find",
+    "pages/mine/mine",
+    "pages/logs/logs",
+    "pages/Content/Content",
+    "pages/Collection/Collection",
+    "pages/Theme/Theme",
+    "pages/history/history"
+  ],
+  "usingComponents": {
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "van-skeleton": "@vant/weapp/skeleton/index",
+    "van-card": "@vant/weapp/card/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-image": "@vant/weapp/image/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-row": "@vant/weapp/row/index",
+    "van-col": "@vant/weapp/col/index",
+    "van-grid": "@vant/weapp/grid/index",
+    "van-grid-item": "@vant/weapp/grid-item/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-swipe-cell": "@vant/weapp/swipe-cell/index",
+    "van-panel": "@vant/weapp/panel/index",
+    "van-empty": "@vant/weapp/empty/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-action-sheet": "@vant/weapp/action-sheet/index",
+    "van-notify": "@vant/weapp/notify/index",
+    "van-tag": "@vant/weapp/tag/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-popup": "@vant/weapp/popup/index"
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "@navBackgroundColor",
+    "navigationBarTitleText": "RyanNews",
+    "navigationBarTextStyle": "@navTextStyle"
+  },
+  "themeLocation": "theme.json",
+  "darkmode": true,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+
+    "backgroundColor": "@navBackgroundColor",
+    "position": "bottom",
+    "borderStyle": "white",
+    "list": [
+      {
+        "text": "Index",
+        "pagePath": "pages/home/home",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/_home.png"
+      },
+      {
+        "text": "Find",
+        "pagePath": "pages/Find/Find",
+        "iconPath": "static/find.png",
+        "selectedIconPath": "static/_find.png"
+      },
+      {
+        "text": "Mine",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/_mine.png"
+      }
+    ]
+  }
+}

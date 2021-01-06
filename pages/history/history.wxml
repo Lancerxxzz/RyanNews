@@ -1,0 +1,15 @@
+<!--pages/history/history.wxml-->
+<van-empty description="浏览记录暂时为空" wx:if="{{History==''}}" />
+<view  wx:for="{{History}}"   id="{{item.newsid}}"class="newslist" wx:key="index">
+  <van-card  bindtap="navigate" id="{{item.newsid}}" ><!--  tag="{{item.tag}}" -->
+<div slot="title" class="title">{{item.title}}</div>
+
+<view slot="desc" class="desc">{{item.inner}}"</view>
+
+<!-- <div slot="thumb" wx:if="{{item.img!=null}}">
+  <van-image width="88" height="88"
+  fit="cover" src="{{item.img}}" />
+  </div> -->
+
+</van-card>
+</view>

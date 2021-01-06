@@ -1,0 +1,11 @@
+/* components/video/video.wxss */
+.videoCard{
+  text-align: center;
+}
+video{
+  width: 720rpx;
+}
+.videoTitle{
+  font-size: 20px;
+  font-weight: bold;
+}

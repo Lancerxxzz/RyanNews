@@ -1,0 +1,17 @@
+<!--pages/Theme/Theme.wxml-->
+<view class="page"style="background-color:{{backgroundColor}}"  >
+<view class="cu-bar bg-white solid-bottom"style="background-color:{{backgroundColor}}">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>选择你所爱
+  </view>
+</view>
+<view class="grid col-3 padding-sm">
+  <view class="padding-sm" wx:for="{{ColorList}}" wx:key>
+    <view class="bg-{{item.name}} padding radius text-center shadow-blur"data-index='{{index}}'bindtap="changeBackgroungcolor">
+      <view class="text-lg">{{item.title}}</view>
+      <view class="margin-top-sm text-Abc">{{item.name}}</view>
+    </view>
+  </view>
+</view>
+<van-notify id="van-notify" />
+</view>

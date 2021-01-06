@@ -1,0 +1,25 @@
+/**app.wxss**/
+@import"icon.wxss"; 
+@import"main.wxss";
+@import"quilleditor.wxss";
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+page{
+  background: #ffffff;
+}
+
+
+
+/* 暗黑模式下应用的样式 */
+@media (prefers-color-scheme: dark) {
+page{
+  background: #000000;
+}
+}
