@@ -1,0 +1,16 @@
+<nz-collapse nzAccordion>
+    <nz-collapse-panel *ngFor="let panel of panels;" [nzHeader]="panel.title" (click)="getpl(panel)">
+        <nz-list nzItemLayout="horizontal" (click)="onClick();$event.stopPropagation()">
+            <nz-list-item *ngFor="let item of data">
+                <nz-list-item-meta [nzAvatar]="item.avatarUrl" [nzDescription]="item.nickname">
+                    <nz-list-item-meta-title>
+                        <p>{{ item.content }}</p>
+                    </nz-list-item-meta-title>
+                </nz-list-item-meta>
+                <ul nz-list-item-actions>
+                    <nz-list-item-action><a (click)="edit(item);$event.stopPropagation()">delete</a></nz-list-item-action>
+                </ul>
+            </nz-list-item>
+        </nz-list>
+    </nz-collapse-panel>
+</nz-collapse>

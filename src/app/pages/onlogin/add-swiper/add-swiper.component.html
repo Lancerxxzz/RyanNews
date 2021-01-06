@@ -1,0 +1,24 @@
+<nz-table #basicTable [nzData]="newslist" nzShowPagination="false">
+    <thead>
+        <tr>
+            <th>Newsid</th>
+            <th>Title</th>
+            <th>Src</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of newslist">
+            <td>{{ data.newsid }}</td>
+            <td>{{ data.title }}</td>
+            <td nz-popover nzPopoverTitle="照片预览" nzPopoverPlacement="bottom" [nzPopoverContent]="Content">{{ data.img }}</td>
+            <ng-template #Content>
+                <img class="popoverImg" [src]="data.img" alt="" srcset="">
+            </ng-template>
+            <td>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="AddToSwiper(data)">As Swiper</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

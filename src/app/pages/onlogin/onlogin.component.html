@@ -1,0 +1,110 @@
+<nz-layout nzTheme="light">
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+        <div class="logo" [routerLink]="['welcome']">
+            <p *ngIf="!isCollapsed">NewsSystem</p>
+            <img src="../../../assets/3BA28647-F389-472D-A874-547089B95539.JPG" alt="" *ngIf="isCollapsed">
+            <!-- *ngIf="isCollapsed" -->
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline">
+            <li nz-submenu nzTitle="列表模块" nzIcon="bars">
+                <ul>
+                    <li nz-menu-item><a [routerLink]="['newslist']">新闻列表</a></li>
+                    <li nz-menu-item><a [routerLink]="['swiper']">轮播图列表</a></li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="添加模块" nzIcon="appstore-add">
+                <ul>
+                    <li nz-menu-item><a [routerLink]="['addNews']">添加新闻</a></li>
+                    <li nz-menu-item><a [routerLink]="['addSwiper']">添加轮播图</a></li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="用户管理" nzIcon="team">
+                <ul>
+                    <li nz-menu-item><a [routerLink]="['userlist']">用户列表</a></li>
+                    <li nz-menu-item><a [routerLink]="['userlist/usercenter']">个人中心</a></li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="评论管理" nzIcon="align-left">
+                <ul>
+                    <li nz-menu-item><a [routerLink]="['pinglun']">评论列表</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'" (click)="isCollapsed = !isCollapsed"></i>
+            <div class="navbar" style="float: right;">
+                <nz-tabset nzTabPosition="bottom" [(nzSelectedIndex)]="index" (click)="tabClick(index)" class="nav navbar-nav navbar-right">
+                    <nz-tab [nzTitle]="alert">
+                        <ng-template #alert>
+                            <p><i nz-icon nzType="alert"></i>消息中心</p>
+                        </ng-template>
+                    </nz-tab>
+                    <nz-tab [nzTitle]="scan">
+                        <ng-template #scan>
+                            <p><i nz-icon nzType="scan"></i>体验小程序</p>
+                        </ng-template>
+                    </nz-tab>
+                    <nz-tab [nzTitle]="User">
+                        <ng-template #User>
+                            <p nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"><i nz-icon nzType="user-switch"></i>{{userInfo[0].admin}}</p>
+                        </ng-template>
+                    </nz-tab>
+                    <nz-tab [nzTitle]="ExitSystem">
+                        <ng-template #ExitSystem>
+                            <p><i nz-icon nzType="poweroff"></i>退出系统</p>
+                        </ng-template>
+                    </nz-tab>
+
+                </nz-tabset>
+            </div>
+
+        </nz-header>
+        <nz-content>
+            <br>
+            <div class="inner-content">
+                <router-outlet></router-outlet>
+            </div>
+        </nz-content>
+        <nz-footer>Copyright ©2020 RyanNews.club All rights reserved</nz-footer>
+    </nz-layout>
+</nz-layout>
+<nz-drawer [nzClosable]="false" [nzWidth]="420" [nzVisible]="visible" nzPlacement="right" nzTitle="消息中心" (nzOnClose)="close()">
+    <nz-table #basicTable [nzData]="data">
+        <thead>
+            <tr>
+                <th>admin</th>
+                <th>email</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of data;let key =index">
+                <td>{{data.admin}}</td>
+                <td>{{data.email}}</td>
+                <td>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="confirmRegister(data)">Confirm</a>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+
+</nz-drawer>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="二维码" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <img [src]="src" alt="">
+</nz-modal>
+
+
+<nz-modal [(nzVisible)]="loginOut" (nzOnCancel)="handleCancel()" (nzOnOk)="ConfirmExit()">
+    <h3>是否退出系统</h3>
+</nz-modal>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+        <li nz-menu-item><a [routerLink]="['userlist']">UserCenter</a></li>
+        <li nz-menu-item><a [routerLink]="['userlist/usercenter']">ChangePassWord</a></li>
+    </ul>
+</nz-dropdown-menu>

@@ -1,0 +1,41 @@
+<div class="page">
+    <div class="tip">
+        <h2>Welcome to RyanNews System</h2>
+    </div>
+    <div class="login">
+        <div class="login_table">
+            <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                <div>
+                    <img src="../assets/3BA28647-F389-472D-A874-547089B95539.JPG" alt="">
+                </div>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your adminName!">
+                        <nz-input-group nzPrefixIcon="user">
+                            <input type="text" nz-input formControlName="admin" placeholder="admin" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <div nz-row class="login-form-margin">
+                    <div nz-col [nzSpan]="12">
+                        <label nz-checkbox formControlName="remember">
+            <span>Remember me</span>
+          </label>
+                    </div>
+                    <div nz-col [nzSpan]="12">
+                        <a class="login-form-forgot" (click)="forget()">Forgot password</a>
+                    </div>
+                </div>
+                <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="Login(validateForm)">Log
+        in</button> Or <a [routerLink]="['/register']"> register now! </a>
+            </form>
+        </div>
+    </div>
+    <div class="buttom">Copyright ©2020 RyanNews.club All rights reserved</div>
+</div>

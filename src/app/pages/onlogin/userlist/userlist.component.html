@@ -1,0 +1,21 @@
+<nz-table #basicTable [nzData]="userlist">
+    <thead>
+        <tr>
+            <th>aid</th>
+            <th>admin</th>
+            <th>password</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of userlist;">
+            <td>{{ data.aid }}</td>
+            <td>{{ data.admin }}</td>
+            <td>{{ data.password }}</td>
+            <td>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="Delete(data)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

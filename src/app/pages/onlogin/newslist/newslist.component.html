@@ -1,0 +1,39 @@
+<nz-spin nzSimple [nzSize]="'large'" *ngIf="loadingdatashow"></nz-spin>
+<nz-table #nzTable [nzData]="listOfDisplayData" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total" [nzFrontPagination]="false" [nzShowQuickJumper]="true" (nzPageIndexChange)="changePageIndex($event)" *ngIf="!loadingdatashow">
+    <!-- [nzLoading]="loading" -->
+    <thead>
+        <tr>
+            <th>Newsid</th>
+            <th nzCustomFilter>Title
+                <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchValue.length > 0" [nzDropdownMenu]="menu">
+                    <i nz-icon nzType="search"></i>
+                </nz-filter-trigger>
+            </th>
+            <th>Author</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of  nzTable.data">
+            <td>{{ data.newsid }}</td>
+            <td>{{ data.title }}</td>
+            <td>{{ data.press }}</td>
+            <td>
+                <nz-divider nzType="vertical"></nz-divider>
+                <a (click)="deletenews(data)">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div class="search-box">
+            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue" />
+            <button nz-button nzSize="small" nzType="primary" (click)="search()" class="search-button">
+        Search
+      </button>
+            <button nz-button nzSize="small" (click)="reset()">Reset</button>
+        </div>
+    </div>
+</nz-dropdown-menu>

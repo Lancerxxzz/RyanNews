@@ -1,0 +1,84 @@
+:host {
+    text-align: center;
+}
+
+.page {
+    background-image: url('../../../assets/222.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    position: relative;
+}
+
+img {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.tip {
+    top: 5%;
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    text-align: center;
+    position: absolute;
+}
+
+.tip h2 {
+    font-size: 3em;
+    font-weight: bold;
+    transition: ease .8s;
+}
+
+.tip h2:hover {
+    font-size: 4em;
+}
+
+.login {
+    position: absolute;
+    float: left;
+    width: 100%;
+    top: 55%;
+    transform: translateY(-55%);
+}
+
+.login_table {
+    position: relative;
+    margin: 0 auto;
+    width: 24em;
+    background-color: rgba(255, 255, 255, .2);
+    border-radius: 10px;
+    padding: 10px 0;
+}
+
+.login-form {
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+.login-form-margin {
+    margin-bottom: 16px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
+}
+
+.buttom {
+    color: white;
+    margin: 0 auto;
+    float: left;
+    position: absolute;
+    width: 100%;
+    top: 88%;
+}
