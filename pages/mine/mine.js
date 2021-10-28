@@ -22,16 +22,22 @@ Page({
   },
 
 
-  getUserInfo: function(e) {
-    console.log('gafasf');
-    
-    console.log(e)
-    var that=this
+  getUserInfo: function(e) {    
+    var that=this;
+    wx.getUserProfile({
+      desc: '用于完善会员信息',
+      success:res=>{
+        console.log(res.userInfo)
+        that.setData({
+            nickName:res.userInfo.nickName,
+            avatarUrl:res.userInfo.avatarUrl,
+            show:true
+        })
+      }
+    })
     app.globalData.userInfo = e.detail.userInfo
-    
     this.setData({
       userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
     wx.login({
       success: res => {
@@ -42,29 +48,11 @@ Page({
           data: {
             js_code: res.code,
           }, success(res) {
-            var openId = res.data.openid
-          console.log(res)
+            var openId = res.data.openid;
           wx.setStorage({
             data: openId,
             key: 'openId',
           })
-          wx.getSetting({
-            success:res=>{
-              if (res.authSetting['scope.userInfo']) {
-                // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-                wx.getUserInfo({
-                  success: res=> {
-                    console.log(res.userInfo)
-                    that.setData({
-                        nickName:res.userInfo.nickName,
-                        avatarUrl:res.userInfo.avatarUrl,
-                        show:true
-                    })
-                  }
-                })
-              }
-            }
-          }) 
           }
         })
       }

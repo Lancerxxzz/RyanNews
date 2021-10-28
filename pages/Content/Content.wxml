@@ -1,6 +1,6 @@
 <!--pages/Content/Content.wxml-->
   <van-notify id="van-notify" />
-<view class="content" wx:for="{{NewsList}}"wx:key="*this">
+<view class="content" wx:for="{{NewsList}}" wx:key="*this">
 
   <van-panel  use-footer-slot >
     <view slot="header" class="header">

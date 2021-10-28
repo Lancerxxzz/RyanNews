@@ -1,21 +1,15 @@
 <!--pages/mine/mine.wxml-->
  <view > 
   <van-notify id="van-notify" />
-  <view wx:if="{{!hasUserInfo && canIUse}}">
-  <view class="avatar">
-    <van-image round fit="fill"width="88" height="88"src=""/>
-  </view>
-  <view class="userinfo" >
-    <button  open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-</view>
+
+  <view >
+      <view class="avatar">
+        <van-image round fit="fill"width="88" height="88"src="{{avatarUrl}}"/>
+      </view>
+      <view  class="{{show==true?'login':'unlogin'}}" bindtap="getUserInfo"  > {{show==true? nickName:'授权登录'}}
+      </view>
 </view>
 
-<view wx:if="{{show}}">
-  <view class="avatar">
-    <van-image round fit="fill"width="88" height="88"src="{{avatarUrl}}"/>
-  </view>
-  <view class="nickname">{{nickName}}</view>
-</view>
 
 
 

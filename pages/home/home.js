@@ -21,7 +21,6 @@ Page({
   },
 pageshow(){
   wx.request({
-    
     url: app.globalData.url+'/wx/index',
     method:'GET',
     dataType:'json',
@@ -143,32 +142,18 @@ pageshow(){
       url: app.globalData.url+'/wx/TagChange',
       method:"POST",
       data:{
-        tagIndex:e.detail.index
+        tabTag:e.detail.title
       },
       success:res=>{
         this.setData({
-          pageName:res.data
+          otherList:res.data
         })
-        if(e.detail.index>0){
-          wx.request({
-            url: app.globalData.url+'/wx/TagChange/'+res.data,
-            method:'POST',
-            dataType:'json',
-            header:{ 'content-type':'application/x-www-form-urlencoded',},
-            data:{
-              classify:classify
-            },
-            success:res=>{
-              console.log(res.data);
-                this.setData({
-                  otherList:res.data,
-                  })
-              }
-          })
-        }
-        else{
-          this.pageshow();
-        }
+        // if(e.detail.index>0){
+
+        // }
+        // else{
+        //   this.pageshow();
+        // }
       } 
     })
   }

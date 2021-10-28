@@ -49,11 +49,8 @@ Page({
       mask:true
     })
     var that=this
-    //console.log(option.query)
+    console.log(option.query)
     const eventChannel = this.getOpenerEventChannel()
-    eventChannel.emit('acceptDataFromOpenedPage', {data: 'test'});
-    eventChannel.emit('someEvent', {data: 'test'});
-    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function(data) {
       console.log("新闻id:"+data.data)
       that.setData({
@@ -67,9 +64,9 @@ Page({
           newsid:that.data.newsid
         },
         success:res=>{
-          console.log(res.data);
+          //console.log(res.data);
           var Num=res.data[1].length;
-         // console.log(res.data[0][0].content);
+         //console.log(res.data[0][0].content);
           var h5text=res.data[0][0].content.replace(/\<img/gi, '<img class="img"')
           that.setData({
           NewsList:res.data[0],
