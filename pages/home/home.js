@@ -14,7 +14,7 @@ Page({
     pageName:'',
     show:false,
     show1:false,
-    notice:"技术是开发它的人的共同灵魂。技术是开发它的人的共同灵魂。技术是开发它的人的共同灵魂。"
+    notice:"技术是开发它的人的共同灵魂。"
   },
   onLoad(){
     this.pageshow()
