@@ -9,7 +9,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UsercenterComponent } from './usercenter/usercenter.component';
 import { PinglunListComponent } from './pinglun-list/pinglun-list.component'
-import { from } from 'rxjs';
 const routes: Routes = [
   {
     path: '', component: OnloginComponent,
