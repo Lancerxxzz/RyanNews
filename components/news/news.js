@@ -30,49 +30,26 @@ Component({
    */
   methods: {
     navigate(e){
-      console.log(this.data.NewsList);
-      wx.navigateTo({
-        url: '/pages/Content/Content',
-        success:res=>{
-          res.eventChannel.emit('acceptDataFromOpenerPage', { data: `${e.currentTarget.id}` })
-        }
-      })
-      console.log("111");
-      
-      console.log(e.currentTarget.id);
-      wx.getStorage({
-        key: 'openId',
-        success:res=>{
-          console.log(res);
-          var userid=res.data
-          wx.request({
-            url: app.globalData.url+'/wx/confirmHistory',
-            method:"GET",
-            data:{
-              newsid:e.currentTarget.id,
-              userid:userid
-            },
-            success:res=>{
-              console.log(res.data);
-              if(res.data==""||res.data==null){
-                wx.request({
-                  url: app.globalData.url+'/wx/history',
-                  method:"POST",
-                  data:{
-                    newsid:e.currentTarget.id,
-                    userid:userid,
-                  },
-                  success:res=>{
-                    console.log("浏览已记录");
-                  }
-                })
-              }else{
-                console.log("浏览已存在");
-              } 
-            }
-          })
-        }
-      })
+      let userid=wx.getStorageSync('openId')
+      if(userid!=""){
+        wx.request({
+          url: app.globalData.url+'/wx/history',
+          method:"POST",
+          data:{
+            newsid:e.currentTarget.id,
+            userid:userid,
+          },
+          success:res=>{
+            wx.navigateTo({
+              url: `../../pages/Content/Content?newsid=${e.currentTarget.id}`,
+            })
+          }
+        })
+      }else{
+        wx.navigateTo({
+          url: `../../pages/Content/Content?newsid=${e.currentTarget.id}`,
+        })
+      }
     },
   },
 

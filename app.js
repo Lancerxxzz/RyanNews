@@ -15,7 +15,7 @@ App({
   globalData: {
     userInfo: null,
    //url:'https://api.ryannews.club',
-    url:'http://localhost:3000',
+    url:'http://localhost:4200',
    ColorList: [{
     title: '嫣红',
     name: 'red',

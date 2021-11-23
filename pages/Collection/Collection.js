@@ -7,33 +7,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    mine_collection:[]
+    mine_collection:[],
+    Userid:""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.datashow()
+    this.datashow();
+    var that=this;
+    that.setData({
+      Userid:options.userid
+    })
   
   },
   datashow(){
-    wx.getStorage({
-      key: 'openId',
+    var that=this;
+    wx.request({
+      url: app.globalData.url+'/wx/mine',
+      method:"GET",
+      data:{
+        userid:that.data.Userid
+      },
+      header:{"Content-Type":"application/json"},
       success:res=>{
-        wx.request({
-          url: app.globalData.url+'/wx/mine',
-          method:"GET",
-          data:{
-            userid:res.data
-          },
-          header:{"Content-Type":"application/json"},
-          success:res=>{
-            console.log(res.data);
-            this.setData({
-              mine_collection:res.data
-            })
-          }
+        console.log(res.data);
+        that.setData({
+          mine_collection:res.data
         })
       }
     })
@@ -46,9 +47,6 @@ Page({
 
 
   },
-
-
-
     add(){
       wx.switchTab({
         url: '/pages/Find/Find',
@@ -105,13 +103,9 @@ onShow(){
   })
 },
 navigator(e){
-  console.log(e.currentTarget.id);
-  console.log(e);
   wx.navigateTo({
-    url: '/pages/Content/Content',
-    success:res=>{
-      res.eventChannel.emit('acceptDataFromOpenerPage', { data: `${e.currentTarget.id}` })
-    }
+    url: `/pages/Content/Content?newsid=${e.currentTarget.id}`,
+
   })
 }
 })

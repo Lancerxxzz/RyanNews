@@ -1,15 +1,15 @@
 <!--pages/Content/Content.wxml-->
   <van-notify id="van-notify" />
-<view class="content" wx:for="{{NewsList}}" wx:key="*this">
+<view class="content" >
 
   <van-panel  use-footer-slot >
     <view slot="header" class="header">
       <view>
-        <div slot="desc" class="author">{{item.press}}</div>
+        <div slot="desc" class="author">{{NewsList.press}}</div>
         <div>  | </div>
-      <div slot="status" class="status">{{item.time}} | {{item.ydNum}}阅读</div>
+      <div slot="status" class="status">{{NewsList.time}} | {{NewsList.ydNum}}阅读</div>
       </view>
-      <view slot="title" class="title">{{item.title}}</view>
+      <view slot="title" class="title">{{NewsList.title}}</view>
 
     </view>
   <view class="inner">
@@ -20,8 +20,8 @@
 
 
 <view class="footer" style="backgroud-color:{{bgc}}">
- <van-row wx:for="{{NewsList}}"wx:key="*this">
-      <van-col span="6"><van-icon size="60rpx" name="/static/good.png" info="{{item.good}}" bind:click="good" /></van-col>
+ <van-row>
+      <van-col span="6"><van-icon size="60rpx" name="/static/good.png" info="{{NewsList.good}}" bind:click="good" /></van-col>
       <van-col span="6"><van-icon size="60rpx" name="/static/chat.png" info="{{pinglunList.length}}" bind:click="talk"/></van-col>
       <van-col span="6"><van-icon size="60rpx" name="/static/collection.png"  bind:click="colleciton" /></van-col>
       <van-col span="6"><van-icon size="60rpx" name="/static/share.png"  bind:click="share"/></van-col>

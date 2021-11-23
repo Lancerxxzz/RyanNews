@@ -9,7 +9,7 @@ Page({
     index:1,
     page:'',
     videoIndex:1,
-    classify:'',
+    classifty:'',
     OtherIndex:1,
     pageName:'',
     show:false,
@@ -37,80 +37,73 @@ pageshow(){
 },
   //上拉触底刷新
   onReachBottom(){
-      if(this.data.page==0){
+    var  that=this;
+      if(that.data.page==0){
         wx.request({
           url: app.globalData.url+'/wx/indexmore',
           method:'GET',
           data:{
-            index:this.data.index
+            index:that.data.index
           },
           dataType:'json',
           header:{"Content-Type":"application/json"},
           success:res=>{
-            console.log(res.data);
-            var List=this.data.NewsList.concat(res.data)
-              this.setData({
-              NewsList:List,
-              index:this.data.index+1
+            console.log(res);
+            if(res.data[0].length==0){
+              wx.showToast({
+                title: '全部加载完啦！',
+                icon:"success"
               })
-              console.log(this.data.index);
-              
-              if((this.data.index-1)*5<=this.data.NewsList.length){
-                wx.showToast({ //如果全部加载完成了也弹一个框
-                  title: '加载中',
-                  icon: 'loading',
-                  duration: 500
-                });
-              }
-              else{
-                wx.showToast({ //如果全部加载完成了也弹一个框
-                  title: '一滴都没有啦',
-                  icon: 'success',
-                  duration: 500
-                });
-                this.setData({
-                  show:true
-                })
-              }
+              that.setData({
+                show:true
+              })
+            }else{
+              wx.showToast({
+                title: '正在努力加载...',
+                icon:"loading"
+              })
+              var List=that.data.NewsList.concat(res.data[0])
+              that.setData({
+                NewsList:List,
+                index:that.data.index+1
+              })
+            }
           }
         })
       }
       else{
-        console.log(this.data.pageName);
-          wx.request({
-            url: app.globalData.url+'/wx/moreIn'+this.data.pageName,
-            method:"GET",
-            data:{
-              classify:this.data.classify,
-              OtherIndex:this.data.OtherIndex
-            },
-            success:res=>{
-              console.log(res.data);
-              var List=this.data.otherList.concat(res.data)
-              this.setData({
-                otherList:List,
-                OtherIndex:this.data.OtherIndex+1
-                })
-                
-              if(res.data!=''){
-                wx.showToast({ //如果全部加载完成了也弹一个框
-                  title: '加载中',
-                  icon: 'loading',
-                  duration: 500
-                });
-              }
-              else{
-                wx.showToast({ //如果全部加载完成了也弹一个框
-                  title: '一滴都没有啦',
-                  icon: 'success',
-                  duration: 500
-                });
-                this.setData({
-                  show1:true
-                })
-              }
+        wx.request({
+          url: app.globalData.url+'/wx/otherMore',
+          method:'GET',
+          data:{
+            OtherIndex:that.data.index,
+            classifty:that.data.classifty
+          },
+          // dataType:'json',
+          // header:{"Content-Type":"application/json"},
+          success:res=>{
+            console.log(res);
+            if(res.data[0].length==0){
+              wx.showToast({
+                title: '全部加载完啦！',
+                icon:"success"
+              })
+              that.setData({
+                show1:true
+              })
+            }else{
+              wx.showToast({
+                title: '正在努力加载...',
+                icon:"loading"
+              })
+              var List=that.data.NewsList.concat(res.data[0])
+              that.setData({
+                NewsList:List,
+                index:that.data.index+1
+              })
             }
-          })
+          }
+        })
       }
     },
 
@@ -134,10 +127,10 @@ pageshow(){
     this.setData({
       page:e.detail.index,
       OtherIndex:1,
-      classify:e.detail.title
+      classifty:e.detail.title
     })
-    var classify=e.detail.title
-    console.log(classify);
+    var classifty=e.detail.title
+    console.log(classifty);
     wx.request({
       url: app.globalData.url+'/wx/TagChange',
       method:"POST",
@@ -148,12 +141,6 @@ pageshow(){
         this.setData({
           otherList:res.data
         })
-        // if(e.detail.index>0){
-
-        // }
-        // else{
-        //   this.pageshow();
-        // }
       } 
     })
   }

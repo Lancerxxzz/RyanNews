@@ -1,6 +1,6 @@
 <!--pages/Collection/Collection.wxml-->
 <van-notify id="van-notify" />
-<view wx:if="{{mine_collection==''}}">
+<view wx:if="{{mine_collection.length==0}}">
     <van-empty  >
     <view slot="description" style="text-align:center">
       <text style="font-weight:bold;color:#000000">空空如也</text>

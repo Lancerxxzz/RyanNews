@@ -19,6 +19,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this;
+      wx.checkSession({
+        success: (res) => {
+          console.log(res);
+          if(res.errMsg=="checkSession:ok"){
+            Notify({ type: 'success', message: '已为您自动登录' });
+            let userInfo=wx.getStorageSync('userInfo')
+            that.setData({
+              nickName:userInfo.nickName,
+              show:true,
+              avatarUrl:userInfo.avatarUrl
+            })
+          }
+        },
+        fail:(err)=>{
+          console.log(err);
+          Notify({ type: 'danger', message: '未检测到登录信息' });
+          that.setData({
+            show:false,
+          })
+        }
+      })
   },
 
 
@@ -28,27 +50,27 @@ Page({
       desc: '用于完善会员信息',
       success:res=>{
         console.log(res.userInfo)
+        wx.setStorageSync('userInfo', res.userInfo);
+        Notify({ type: 'success', message: '登录成功' });
         that.setData({
             nickName:res.userInfo.nickName,
             avatarUrl:res.userInfo.avatarUrl,
-            show:true
+            show:true,
+            userInfo: e.detail.userInfo,
         })
       }
-    })
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
     })
     wx.login({
       success: res => {
         console.log(res);
         wx.request({
-          url: app.globalData.url+"/wx/onLogin", //set in config .js  //2.后台API
+          url: app.globalData.url+"/wx/onLogin", 
           method: "POST",
           data: {
             js_code: res.code,
           }, success(res) {
-            var openId = res.data.openid;
+            console.log(res)
+            let openId = res.data.openid;
           wx.setStorage({
             data: openId,
             key: 'openId',
@@ -75,12 +97,13 @@ Page({
     }
   },
   collection(){
-    if(this.data.show==false){
+    let userid=wx.getStorageSync('openId')
+    if(this.data.userid==''){
       Notify({ type: 'danger', message: '请先登录' });
     }
     else{
       wx.navigateTo({
-        url: '/pages/Collection/Collection',
+        url: `/pages/Collection/Collection?userid=${userid}`,
       })
     }
  
