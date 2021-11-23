@@ -38,8 +38,6 @@ Page({
     this.datashow()
   },
 
-
-
   onFocus(){
     this.setData({
       show:false,
@@ -59,7 +57,6 @@ Page({
     this.setData({
       value: e.detail,
     });
-   //console.log(this.data.value);
     if(this.data.value!=''){
       wx.request({
         url: app.globalData.url+'/wx/search',
@@ -174,15 +171,9 @@ Page({
 
   },
 
-  navigatorTocontent(e){
-    console.log(e.currentTarget.id);
-    console.log('asfasf');
-    
+  navigatorTocontent(e){    
     wx.navigateTo({
-      url: '/pages/Content/Content',
-      success:res=>{
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: `${e.currentTarget.id}` })
-      }
+      url: `/pages/Content/Content?newsid=${e.currentTarget.id}`,
     })
   },
   onShow(){
