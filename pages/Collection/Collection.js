@@ -3,24 +3,16 @@ const app =getApp()
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify';
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     mine_collection:[],
     Userid:""
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    this.datashow();
     var that=this;
     that.setData({
       Userid:options.userid
     })
-  
   },
   datashow(){
     var that=this;
@@ -32,20 +24,14 @@ Page({
       },
       header:{"Content-Type":"application/json"},
       success:res=>{
-        console.log(res.data);
+        let list=  res.data.map((value,index)=>{
+            return value[0];
+        })
         that.setData({
-          mine_collection:res.data
+          mine_collection:list
         })
       }
     })
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-
   },
     add(){
       wx.switchTab({
@@ -78,7 +64,7 @@ Page({
         })
         instance.close();
         break;
-      case 'left':
+      case 'left': break;
       case 'cell':
         instance.close();
         break;
@@ -86,7 +72,7 @@ Page({
   },
 
 onShow(){
-  this.datashow()
+  this.datashow();
   wx.getStorage({
     key: 'bgc',
     success:res=>{
@@ -102,10 +88,9 @@ onShow(){
     }
   })
 },
-navigator(e){
-  wx.navigateTo({
-    url: `/pages/Content/Content?newsid=${e.currentTarget.id}`,
-
-  })
-}
+  navigator(e){
+    wx.navigateTo({
+      url: `/pages/Content/Content?newsid=${e.currentTarget.id}`,
+    })
+  }
 })

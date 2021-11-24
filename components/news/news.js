@@ -30,27 +30,9 @@ Component({
    */
   methods: {
     navigate(e){
-      let userid=wx.getStorageSync('openId')
-      if(userid!=""){
-        wx.request({
-          url: app.globalData.url+'/wx/history',
-          method:"POST",
-          data:{
-            newsid:e.currentTarget.id,
-            userid:userid,
-          },
-          success:res=>{
-            wx.navigateTo({
-              url: `../../pages/Content/Content?newsid=${e.currentTarget.id}`,
-            })
-          }
-        })
-      }else{
-        wx.navigateTo({
-          url: `../../pages/Content/Content?newsid=${e.currentTarget.id}`,
-        })
-      }
+      wx.navigateTo({
+        url: `../../pages/Content/Content?newsid=${e.currentTarget.id}`,
+      })
     },
-  },
-
+  }
 })

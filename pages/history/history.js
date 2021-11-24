@@ -7,26 +7,33 @@ Page({
    */
   data: {
       show:false,
-      History:''
+      History:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this;
+    var userid=wx.getStorageSync('openId');
+    wx.request({
+      url: app.globalData.url+'/wx/getHistory',
+      method:"GET",
+      header:{"Content-Type":"application/json"},
+      data:{
+        userid:userid
+      },
+      success:res=>{
+        let list=  res.data.map((value,index)=>{
+          return value[0];
+      })
+        that.setData({
+          History:list
+        })
+        console.log(that.data.History)
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
     wx.getStorage({
       key: 'bgc',
@@ -42,38 +49,10 @@ Page({
               })
       }
     })
-    var that=this
-    wx.getStorage({
-      key: 'openId',
-      success:res=>{
-        console.log(res.data);
-        var userid=res.data
-        wx.request({
-          url: app.globalData.url+'/wx/getHistory',
-          method:"GET",
-          header:{"Content-Type":"application/json"},
-          data:{
-            userid:userid
-          },
-          success:res=>{
-            console.log(res.data);
-            that.setData({
-              History:res.data
-            })
-          }
-        })
-      }
-    })
-    
   },
   navigate(e){
-    console.log(e.currentTarget.id);
-    console.log(e);
     wx.navigateTo({
-      url: '/pages/Content/Content',
-      success:res=>{
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: `${e.currentTarget.id}` })
-      }
+      url: `/pages/Content/Content?newsid=${e.currentTarget.id}`,
     })
   }
 })

@@ -1,6 +1,6 @@
 <!--components/news.wxml-->
 
-  <van-notice-bar mode="closeable" text="{{notice}}" scrollable wx:if="{{notice!=null}}" />
+  <van-notice-bar mode="closeable" text="{{notice}}" scrollable  speed="{{90}}" wx:if="{{notice!=null}}" />
 <swiper indicator-dots="true" circular="true" autoplay="true" interval="2500" duration="500"  indicator-color="#8799a3" indicator-active-color="#0081ff"  wx:if="{{swiper}}">
   <swiper-item wx:for="{{swiper}}" wx:key="*this" id="{{item.newsid}}" bindtap="navigate">
    <image mode="widthFix" src="{{item.src}}"></image>

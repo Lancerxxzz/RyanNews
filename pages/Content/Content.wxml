@@ -31,32 +31,28 @@
 </view>
 
 
-<van-action-sheet show="{{ show }}" title="{{plNum}} " bind:close="onClose"   >
+<van-action-sheet show="{{ show }}" title="{{plNum}} " bind:close="onClose"   class="plBlock">
 
-<view wx:if="{{pinglunList==''}}" class="noChat">
-  当前还没有评论，快来留下你的神评吧
-</view>
-<view wx:for="{{pinglunList}}" wx:key="index" class="list">
-  <van-cell value="{{item.pltime}}">
-    <div  slot="icon" class="avatar"> <van-image round width="70rpx"height="70rpx"src="{{item.avatarUrl}}"/></div>
-  <view slot="title">
-    <view class="van-cell-text">{{item.nickname}}</view>
-    <van-tag plain color="#fff"><div class="pinglun">{{item.content}}</div></van-tag>
-  </view>
-</van-cell>
-
-</view>
-
-<van-button  type="default" round custom-style="width:40px;height:40px;position: fixed;right: 20rpx;bottom:10rpx" icon="comment-o" color="green" bind:click="submit"></van-button> 
-
-
+    <view wx:if="{{pinglunList==''}}" class="noChat">
+      当前还没有评论，快来留下你的神评吧
+    </view>
+    <view wx:for="{{pinglunList}}" wx:key="index" class="list">
+      <van-cell value="{{item.pltime}}">
+        <div  slot="icon" class="avatar"> <van-image round width="70rpx"height="70rpx"src="{{item.avatarUrl}}"/></div>
+      <view slot="title">
+        <view class="van-cell-text">{{item.nickname}}</view>
+        <van-tag plain color="#fff"><div class="pinglun">{{item.content}}</div></van-tag>
+      </view>
+    </van-cell>
+    </view>
+    <van-button  type="default" round custom-style="width:80rpx;height:80rpx;position: fixed;right: 20rpx;bottom:10rpx" icon="comment-o" color="green" bind:click="submit"></van-button> 
 </van-action-sheet>
 
-<van-action-sheet show="{{ show1 }}" title="我的神评" bind:close="onClose">
+<van-action-sheet show="{{show1}}" title="我的神评" bind:close="onClose">
   <view>
     <van-cell-group>
   <van-field
-    model:value="{{ message  }}"
+    model:value="{{message}}"
     center
     clearable
     autosize= "{maxHeight: 100, minHeight: 50}"

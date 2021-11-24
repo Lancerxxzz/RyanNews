@@ -15,6 +15,7 @@
 
 .status {
   color: #8B8989;
+
 }
 
 .author,
@@ -24,6 +25,7 @@
 }
 
 .title {
+  font-style: italic;
   font-size: 52rpx;
   font-weight: bold;
   margin-top: 70rpx;
@@ -77,9 +79,14 @@ display: block;
 }
 .list{
   display: block;
+
+}
+.plBlock{
+  min-height: 600rpx;
 }
 .noChat{
   width: 100%;
   text-align: center;
   padding: 20px;
+  min-height: 600rpx;
 }

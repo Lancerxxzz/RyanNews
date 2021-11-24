@@ -14,12 +14,13 @@ Page({
     pageName:'',
     show:false,
     show1:false,
-    notice:"技术是开发它的人的共同灵魂。"
+    ad:""
   },
   onLoad(){
     this.pageshow()
   },
 pageshow(){
+  var that=this;
   wx.request({
     url: app.globalData.url+'/wx/index',
     method:'GET',
@@ -27,10 +28,11 @@ pageshow(){
     header:{"Content-Type":"application/json"},
     success:res=>{
       console.log(res.data);
-        this.setData({
+      that.setData({
             NewsList:res.data[0],
             swiper:res.data[1],
-            videoList:res.data[2]
+            //videoList:res.data[2],
+            ad:res.data[2].content
         })
     }
   })

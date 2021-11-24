@@ -22,7 +22,6 @@ Page({
     var that=this;
       wx.checkSession({
         success: (res) => {
-          console.log(res);
           if(res.errMsg=="checkSession:ok"){
             Notify({ type: 'success', message: '已为您自动登录' });
             let userInfo=wx.getStorageSync('userInfo')
@@ -62,14 +61,12 @@ Page({
     })
     wx.login({
       success: res => {
-        console.log(res);
         wx.request({
           url: app.globalData.url+"/wx/onLogin", 
           method: "POST",
           data: {
             js_code: res.code,
           }, success(res) {
-            console.log(res)
             let openId = res.data.openid;
           wx.setStorage({
             data: openId,

@@ -4,7 +4,7 @@
   <van-tabs  bind:change="onChange" swipeable="true" animated="true" >
   <van-tab title="推荐" >
     <view>
-        <news NewsList="{{NewsList}}" swiper="{{swiper}}" notice="{{notice}}"></news>
+        <news NewsList="{{NewsList}}" swiper="{{swiper}}" notice="{{ad}}"></news>
         <van-divider wx:if="{{show}}" contentPosition="center">我也是有底线的</van-divider>
     </view>
   </van-tab>

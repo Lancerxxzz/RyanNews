@@ -28,15 +28,36 @@ Page({
    */
   onLoad: function (option) {
     var that=this;
+    that.setData({
+      newsid:option.newsid
+    })
+    let userid=wx.getStorageSync('openId')
+    if(userid!=""){
+      wx.request({
+        url: app.globalData.url+'/wx/history',
+        method:"POST",
+        data:{
+          newsid:option.newsid,
+          userid:userid,
+        },
+        success:res=>{
+          console.log(res);
+          that.getContent();
+        }
+      })
+    }else{
+      that.getContent();
+    }
+  },
+  getContent(){
+    var that=this;
     wx.showLoading({
       title: '正在努力加载中...',
       mask:true
     })
     that.setData({
-      newsid:option.newsid,
       Userid:wx.getStorageSync('openId')
     });
-
       wx.request({
         url: app.globalData.url+'/wx/NewsContent',
         method:'GET',
@@ -45,20 +66,19 @@ Page({
           newsid:that.data.newsid
         },
         success:res=>{
+          console.log(res)
           var Num=res.data[1].length;
-          var h5text=res.data[0][0].content.replace(/\<img/gi, '<img class="img"')
+          var h5text=res.data[0].content.replace(/\<img/gi, '<img class="img"')
           that.setData({
-          NewsList:res.data[0][0],
+          NewsList:res.data[0],
           nodes:h5text,
            pinglunList:res.data[1],
            plNum:`评论区(${Num}条评论)`
           })
           wx.hideLoading({})
         }
-       
     })
   },
-
   good(){
     if(this.data.Userid!=''){
     wx.request({
@@ -133,6 +153,7 @@ Page({
         },
         header:{"Content-Type":"application/x-www-form-urlencoded"},
         success:res=>{
+          console.log(res);
           Notify({ type: 'success', message: '发表评论成功' });
           that.setData({
               show1:false,

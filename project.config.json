@@ -44,7 +44,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.20.1",
   "appid": "wx5b610148f14550be",
-  "projectname": "wx_demo2",
+  "projectname": "RyanNews",
   "cloudfunctionRoot": "cloudfunctions/",
   "debugOptions": {
     "hidedInDevtools": []
