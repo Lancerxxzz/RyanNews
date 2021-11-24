@@ -49,7 +49,7 @@ export class OnloginComponent implements OnInit {
   data = []
 
   msgCenter() {
-    this.http.GetRegister("/zorro/getregister").subscribe((data: any) => {
+    this.http.GetRegister("/web/getregister").subscribe((data: any) => {
       this.data = data
       console.log(data);
     })
@@ -60,7 +60,7 @@ export class OnloginComponent implements OnInit {
 
     const user: any = JSON.parse(sessionStorage.getItem("userInfo"));
     if (user[0].aid == 1) {
-      this.http.confirmRegister("/zorro/confirmRegister", e.admin, e.password, e.email, e.tel).subscribe((data) => {
+      this.http.confirmRegister("/web/confirmRegister", e.admin, e.password, e.email, e.tel).subscribe((data) => {
         console.log(data);
         this.msgCenter()
         this.message.create("success", "操作成功");

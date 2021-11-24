@@ -16,7 +16,7 @@ export class UsercenterComponent implements OnInit {
     theme: 'twotone'
   };
   userInfo: any;
-  url = "zorro/changUserInfo";
+  url = "web/changUserInfo";
 
   constructor(private fb: FormBuilder, public http: HttpServiceService, private message: NzMessageService, private router: Router) { }
 

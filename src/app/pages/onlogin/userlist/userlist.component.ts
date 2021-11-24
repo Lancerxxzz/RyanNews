@@ -14,7 +14,7 @@ interface User {
 export class UserlistComponent implements OnInit {
 
   constructor(public http: HttpServiceService, private message: NzMessageService) { }
-  public url = "zorro/userlist";
+  public url = "web/userlist";
   public userlist: User[] = [];
   ngOnInit(): void {
     this.pageshow();
@@ -31,7 +31,7 @@ export class UserlistComponent implements OnInit {
       this.message.create("error", `最终管理员不能被删除`);
     }
     else {
-      this.http.DeleteUser("/zorro/deleteUser", e.aid).subscribe((data: any) => {
+      this.http.DeleteUser("/web/deleteUser", e.aid).subscribe((data: any) => {
         if (data.status == 200) {
           this.pageshow();
           this.message.create("success", `操作成功`);

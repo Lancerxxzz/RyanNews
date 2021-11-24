@@ -60,7 +60,7 @@ export class RegisterComponent implements OnInit {
   register(e) {
     console.log(e.value);
     if (e.value.password == e.value.checkPassword) {
-      this.http.register('/zorro/register', e.value.admin, e.value.password, e.value.email, e.value.phoneNumber).subscribe((data: any) => {
+      this.http.register('/web/register', e.value.admin, e.value.password, e.value.email, e.value.phoneNumber).subscribe((data: any) => {
         console.log(data);
         if (data.status == 200) {
           this.message.create("success", "等待管理员通过")

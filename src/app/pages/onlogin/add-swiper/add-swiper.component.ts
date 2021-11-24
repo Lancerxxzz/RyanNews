@@ -13,9 +13,9 @@ interface News {
 })
 export class AddSwiperComponent implements OnInit {
   public NewsList: News[] = [];
-  public url = "zorro/alternativeSwiper";
+  public url = "web/alternativeSwiper";
   public newslist: any;
-  public api: any = "zorro/addSwiper";
+  public api: any = "web/addSwiper";
   constructor(public http: HttpServiceService, private msg: NzMessageService) { }
 
   ngOnInit(): void {

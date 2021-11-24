@@ -13,11 +13,11 @@ interface News {
 })
 export class NewslistComponent implements OnInit {
   public total;
-  public url = "zorro/index";
-  public moreUrl = "zorro/indexmore";
+  public url = "web/index";
+  public moreUrl = "web/indexmore";
   public NewsList: News[] = [];
-  public api: any = "zorro/addSwiper";
-  public delapi: any = "zorro/DelNews";
+  public api: any = "web/addSwiper";
+  public delapi: any = "web/DelNews";
   loading = true;
   constructor(public http: HttpServiceService, private message: NzMessageService) { }
   searchValue = '';

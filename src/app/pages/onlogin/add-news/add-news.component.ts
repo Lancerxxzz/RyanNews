@@ -21,7 +21,7 @@ export class AddNewsComponent implements OnInit {
   public editModel: boolean = false;
   public data: any;
   public content: string;
-  Url = "/zorro/uploadImage";
+  Url = "/web/uploadImage";
   ImgSrc: any;
   fileList1: NzUploadFile[] = [];
   quillConfig = {
@@ -73,7 +73,7 @@ export class AddNewsComponent implements OnInit {
     }
     if (event.type == 'removed') {
       console.log("removed");
-      this.http.removeImage("/zorro/removeImage", this.ImgSrc).subscribe((data) => {
+      this.http.removeImage("/web/removeImage", this.ImgSrc).subscribe((data) => {
         console.log(data);
         this.fileList1 = [];
         this.ImgSrc = null;
@@ -88,7 +88,7 @@ export class AddNewsComponent implements OnInit {
     }
     else {
       if (this.validateForm.value.simpletitle != null && this.validateForm.value.title != null && this.validateForm.value.inner != null && this.validateForm.value.content != null && this.validateForm.value.title != null && this.validateForm.value.press != null && this.validateForm.value.status != null) {
-        this.http.InputNewsToNewslist("/zorro/addNews", this.validateForm.value.simpletitle, this.validateForm.value.title, this.validateForm.value.inner, this.validateForm.value.content, this.validateForm.value.classify, this.validateForm.value.tag, this.ImgSrc, this.validateForm.value.press, this.validateForm.value.status).subscribe((data: any) => {
+        this.http.InputNewsToNewslist("/web/addNews", this.validateForm.value.simpletitle, this.validateForm.value.title, this.validateForm.value.inner, this.validateForm.value.content, this.validateForm.value.classify, this.validateForm.value.tag, this.ImgSrc, this.validateForm.value.press, this.validateForm.value.status).subscribe((data: any) => {
           console.log(data);
           if (data.status == 200) {
             this.message.create("success", `Submit success`);

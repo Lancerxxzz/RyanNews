@@ -18,7 +18,7 @@ export class PinglunListComponent implements OnInit {
   getpl(e) {
 
     console.log(e);
-    this.http.getplBynewsid('zorro/getplcontent', e.newsid).subscribe((data: any) => {
+    this.http.getplBynewsid('web/getplcontent', e.newsid).subscribe((data: any) => {
       this.data = data;
       console.log(data);
       this.show = true

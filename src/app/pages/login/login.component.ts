@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private router: Router, public http: HttpServiceService, private message: NzMessageService) { }
   validateForm!: FormGroup;
-  public api: any = "/zorro/login";
+  public api: any = "/web/login";
   public forgetTag: boolean = false;
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      admin: [null, [Validators.required]],
+      username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
@@ -36,11 +36,10 @@ export class LoginComponent implements OnInit {
 
   Login(e) {
     console.log(e.value);
-    this.http.Confirmlogin(this.api, e.value.admin, e.value.password).subscribe((data: any) => {
+    this.http.Confirmlogin(this.api, e.value.username, e.value.password).subscribe((data: any) => {
       console.log(data);
       if (data.status == 200) {
         this.router.navigate(["onlogin"]);
-        console.log("login ");
         this.message.create("success", `Welcome ${this.validateForm.value.admin}`);
         if (this.validateForm.value.remember) {
           sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo));

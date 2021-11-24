@@ -6,16 +6,10 @@ import { EmailValidator } from '@angular/forms';
   providedIn: 'root'
 })
 export class HttpServiceService {
-  private FormCfg = {
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  }
-  private JsonCfg = {
-    headers: { 'Content-Type': 'application/json' },
-  }
   constructor(private http: HttpClient) { }
 
   Confirmlogin(api: any, admin: any, password: any) {
-    return this.http.post(api, { "admin": admin, "password": password });
+    return this.http.post(api, { "username": admin, "password": password });
   }
 
   removeImage(api, url) {

@@ -12,7 +12,7 @@ interface Swiper {
   styleUrls: ['./swiper.component.css']
 })
 export class SwiperComponent implements OnInit {
-  public url = "zorro/swiper";
+  public url = "web/swiper";
   public show: boolean = false;
   public SwiperList: Swiper[] = [];
 
