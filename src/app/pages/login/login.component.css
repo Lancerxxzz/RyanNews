@@ -3,7 +3,7 @@
 }
 
 .page {
-    background-image: url('../../../assets/222.jpg');
+    background-image: url('../../../assets/wallhaven-k7lpe6.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -28,16 +28,19 @@ img {
     float: left;
     text-align: center;
     position: absolute;
+
 }
 
 .tip h2 {
     font-size: 3em;
     font-weight: bold;
     transition: ease .8s;
+  /*background: linear-gradient(#141e30, #243b55);;*/
 }
 
 .tip h2:hover {
     font-size: 4em;
+  /*background: linear-gradient(#141e30, #243b55);;*/
 }
 
 .login {

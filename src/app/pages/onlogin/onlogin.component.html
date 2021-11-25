@@ -48,7 +48,7 @@
                     </nz-tab>
                     <nz-tab [nzTitle]="User">
                         <ng-template #User>
-                            <p nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"><i nz-icon nzType="user-switch"></i>{{userInfo[0].admin}}</p>
+                            <p nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu"><i nz-icon nzType="user-switch"></i>{{userInfo.username}}</p>
                         </ng-template>
                     </nz-tab>
                     <nz-tab [nzTitle]="ExitSystem">
@@ -67,7 +67,7 @@
                 <router-outlet></router-outlet>
             </div>
         </nz-content>
-        <nz-footer>Copyright ©2020 RyanNews.club All rights reserved</nz-footer>
+        <nz-footer>Copyright ©2021 RyanNews.club All rights reserved</nz-footer>
     </nz-layout>
 </nz-layout>
 <nz-drawer [nzClosable]="false" [nzWidth]="420" [nzVisible]="visible" nzPlacement="right" nzTitle="消息中心" (nzOnClose)="close()">

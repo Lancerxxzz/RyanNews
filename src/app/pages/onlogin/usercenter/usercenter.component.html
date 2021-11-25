@@ -2,7 +2,7 @@
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>姓名</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input type="text" id="nickname" [value]="userInfo[0].admin" [disabled]="true" />
+            <input nz-input type="text" id="nickname" [value]="userInfo.username" [disabled]="true" />
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -14,7 +14,7 @@
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>邮箱</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input type="email" id="email" [value]="userInfo[0].email" [disabled]="true" />
+            <input nz-input type="email" id="email" [value]="userInfo.email" [disabled]="true" />
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
@@ -23,7 +23,7 @@
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input correct tel!">
             <input nz-input id="phoneNumber" maxlength="11" type=”text” formControlName="tel" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
-                [placeholder]="userInfo[0].tel" />
+                [placeholder]="userInfo.tel" />
         </nz-form-control>
     </nz-form-item>
 

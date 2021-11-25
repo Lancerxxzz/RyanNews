@@ -12,64 +12,49 @@ interface News {
   styleUrls: ['./newslist.component.css']
 })
 export class NewslistComponent implements OnInit {
-  public total;
-  public url = "web/index";
-  public moreUrl = "web/indexmore";
-  public NewsList: News[] = [];
-  public api: any = "web/addSwiper";
-  public delapi: any = "web/DelNews";
-  loading = true;
   constructor(public http: HttpServiceService, private message: NzMessageService) { }
+  public total;
+  public url = 'web/n_list';
+  public moreUrl = 'web/indexmore';
+  public NewsList: News[] = [];
+  public api: any = 'web/addSwiper';
+  public delapi: any = 'web/DelNews';
+  loading = true;
   searchValue = '';
   visible = false;
-  pageIndex: number = 1;
+  pageIndex = 1;
   pageSize = 8;
-  public loadingdatashow: boolean = true;
+  public loadingdatashow = true;
 
-  ngOnInit(): void {
-    this.datashow()
-
-  }
-  datashow() {
-    this.http.get(this.url).subscribe((data: any) => {
-      console.log(data[1][0].total);
-      console.log(data.length);
-      this.NewsList = data[0];
-      this.total = data[1][0].total;
-      this.loadingdatashow = false;
-      this.listOfDisplayData = [...this.NewsList];
-    })
-  }
-
-  deletenews(e) {
-    console.log(e.newsid);
-    this.http.DeleteByNewsid(this.delapi, e.newsid).subscribe((data) => {
-      console.log(data);
-      console.log(this.pageIndex);
-      this.http.IndexMore(this.moreUrl, this.pageIndex).subscribe((data: any) => {
-        console.log(data);
-        this.loading = false;
-        this.NewsList = data
-        this.listOfDisplayData = [...this.NewsList];
-      })
-    }, (err) => {
-      console.log(err);
-    })
-
-  }
-  changePageIndex(pageIndex) {
-    this.pageIndex = pageIndex;
-    console.log(this.pageIndex);
-    this.http.IndexMore(this.moreUrl, this.pageIndex).subscribe((data: any) => {
-      console.log(data);
-      this.loading = false;
-      this.NewsList = data
-      this.listOfDisplayData = [...this.NewsList];
-    })
-  }
 
 
   listOfDisplayData = [...this.NewsList];
+
+  ngOnInit(): void {
+    this.datashow();
+
+  }
+  // tslint:disable-next-line:typedef
+  datashow() {
+    this.http.get(this.url).subscribe((data: any) => {
+      this.NewsList = data;
+      this.total = data.length;
+      this.loadingdatashow = false;
+      this.listOfDisplayData = [...this.NewsList];
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  deletenews(e) {
+    console.log(e.newsid);
+    this.http.DeleteByNewsid(this.delapi, e.newsid).subscribe((data: any) => {
+      this.NewsList = data;
+      this.listOfDisplayData = [...this.NewsList];
+    }, (err) => {
+      console.log(err);
+    });
+
+  }
   reset(): void {
     this.searchValue = '';
     this.search();

@@ -12,29 +12,32 @@ interface News {
   styleUrls: ['./add-swiper.component.css']
 })
 export class AddSwiperComponent implements OnInit {
-  public NewsList: News[] = [];
-  public url = "web/alternativeSwiper";
-  public newslist: any;
-  public api: any = "web/addSwiper";
+  public url = 'web/imgNews';
+  public swiperlist: [];
+  public api: any = 'web/addSwiper';
   constructor(public http: HttpServiceService, private msg: NzMessageService) { }
 
   ngOnInit(): void {
-    this.datashow()
+    this.datashow();
   }
+  // tslint:disable-next-line:typedef
   datashow() {
     this.http.get(this.url).subscribe((data: []) => {
       console.log(data);
-      this.newslist = data
-    })
+      this.swiperlist = data;
+    });
   }
+  // tslint:disable-next-line:typedef
   AddToSwiper(e) {
     console.log(e.newsid);
     this.http.selectNewslistIntoSwiper(this.api, e.newsid).subscribe((data) => {
-      console.log(data);
-      this.msg.create("success", ` Select As Swiper successed`);
-    }, (err) => {
-      this.msg.create("error", ` This has been existed`);
-    })
+      // tslint:disable-next-line:triple-equals
+      if (data.msg == 'success'){
+        this.msg.create('success', ` Select As Swiper successed`);
+      }else {
+        this.msg.create('error', ` This has been existed`);
+      }
+    });
   }
 
 }

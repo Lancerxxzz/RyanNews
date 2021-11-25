@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpServiceService } from '../../../service/http-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 interface User {
-  aid: number;
-  admin: string;
+  uid: number;
+  username: string;
   password: string;
 }
 @Component({
@@ -14,7 +14,7 @@ interface User {
 export class UserlistComponent implements OnInit {
 
   constructor(public http: HttpServiceService, private message: NzMessageService) { }
-  public url = "web/userlist";
+  public url = "web/u_list";
   public userlist: User[] = [];
   ngOnInit(): void {
     this.pageshow();

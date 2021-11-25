@@ -1,5 +1,5 @@
 <nz-spin nzSimple [nzSize]="'large'" *ngIf="loadingdatashow"></nz-spin>
-<nz-table #nzTable [nzData]="listOfDisplayData" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total" [nzFrontPagination]="false" [nzShowQuickJumper]="true" (nzPageIndexChange)="changePageIndex($event)" *ngIf="!loadingdatashow">
+<nz-table #nzTable [nzData]="listOfDisplayData" [(nzPageIndex)]="pageIndex" [(nzPageSize)]="pageSize" [nzTotal]="total"  [nzShowQuickJumper]="true"  *ngIf="!loadingdatashow">
     <!-- [nzLoading]="loading" -->
     <thead>
         <tr>

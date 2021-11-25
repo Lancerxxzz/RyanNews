@@ -12,7 +12,7 @@ interface Swiper {
   styleUrls: ['./swiper.component.css']
 })
 export class SwiperComponent implements OnInit {
-  public url = "web/swiper";
+  public url = "web/s_list";
   public show: boolean = false;
   public SwiperList: Swiper[] = [];
 
@@ -24,7 +24,7 @@ export class SwiperComponent implements OnInit {
   datashow() {
     this.http.get(this.url).subscribe((data: []) => {
       console.log(data);
-      this.SwiperList = data
+      this.SwiperList = data;
       console.log(this.SwiperList);
       if (this.SwiperList == null) {
         this.show = true

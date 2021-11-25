@@ -10,6 +10,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./onlogin.component.css']
 })
 export class OnloginComponent implements OnInit {
+  constructor(private router: Router, private location: Location, public http: HttpServiceService, private message: NzMessageService) { }
   isCollapsed = false;
   visible = false;
   isVisible = false;
@@ -17,7 +18,7 @@ export class OnloginComponent implements OnInit {
   index: number;
   userInfo: any;
   src: any = 'https://api.ryannews.club/wxcode.jpg';
-  constructor(private router: Router, private location: Location, public http: HttpServiceService, private message: NzMessageService) { }
+  data = [];
 
   ngOnInit(): void {
     this.userInfo = JSON.parse(sessionStorage.getItem('userInfo'));
@@ -27,7 +28,7 @@ export class OnloginComponent implements OnInit {
     switch (e) {
       case 0:
         console.log('msgCenter');
-        this.msgCenter()
+        this.msgCenter();
         this.visible = true;
         break;
       case 1:
@@ -36,7 +37,6 @@ export class OnloginComponent implements OnInit {
         break;
       case 2:
         console.log('UserCenter');
-
         break;
       case 3:
         console.log('exit system');
@@ -46,28 +46,25 @@ export class OnloginComponent implements OnInit {
         break;
     }
   }
-  data = []
 
   msgCenter() {
-    this.http.GetRegister("/web/getregister").subscribe((data: any) => {
-      this.data = data
+    this.http.GetRegister('/web/getregister').subscribe((data: any) => {
+      this.data = data;
       console.log(data);
-    })
+    });
   }
+  // tslint:disable-next-line:typedef
   confirmRegister(e) {
-    console.log(e);
-
-
-    const user: any = JSON.parse(sessionStorage.getItem("userInfo"));
+    const user: any = JSON.parse(sessionStorage.getItem('userInfo'));
     if (user[0].aid == 1) {
-      this.http.confirmRegister("/web/confirmRegister", e.admin, e.password, e.email, e.tel).subscribe((data) => {
+      this.http.confirmRegister('/web/confirmRegister', e.admin, e.password, e.email, e.tel).subscribe((data) => {
         console.log(data);
-        this.msgCenter()
-        this.message.create("success", "操作成功");
-      })
+        this.msgCenter();
+        this.message.create('success', '操作成功');
+      });
     }
     else {
-      this.message.create("error", "当前用户没有权限操作")
+      this.message.create('error', '当前用户没有权限操作');
     }
   }
 
@@ -89,9 +86,9 @@ export class OnloginComponent implements OnInit {
   ConfirmExit(): void {
     this.loginOut = false;
     this.router.navigate(['login']).then(() => {
-      sessionStorage.removeItem("userInfo");
-      this.message.create("success", "成功退出系统")
-    })
+      sessionStorage.removeItem('userInfo');
+      this.message.create('success', '成功退出系统');
+    });
   }
 
 }

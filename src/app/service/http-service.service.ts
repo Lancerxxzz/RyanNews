@@ -21,13 +21,13 @@ export class HttpServiceService {
     return this.http.get(api)
   }
 
-  IndexMore(api: any, page: any) {
-
-    return this.http.post(api, { "pageIndex": page })
-  }
+  // IndexMore(api: any, page: any) {
+  //
+  //   return this.http.post(api, { "pageIndex": page })
+  // }
   DeleteByNewsid(api: any, newsid: String) {
 
-    return this.http.post(api, { "newsid": newsid })
+    return this.http.post(api, { "newsid": newsid });
   }
   InputNewsToNewslist(api: any, simple: any, title, inner, content, classify, tag, img, press, status) {
 

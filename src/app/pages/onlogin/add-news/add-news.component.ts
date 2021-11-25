@@ -18,26 +18,26 @@ export class AddNewsComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
-  public editModel: boolean = false;
+  public editModel = false;
   public data: any;
   public content: string;
-  Url = "/web/uploadImage";
+  Url = '/web/uploadImage';
   ImgSrc: any;
   fileList1: NzUploadFile[] = [];
   quillConfig = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
-      [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
-      [{ 'direction': 'rtl' }],                         // text directio
-      [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-      [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
-      [{ 'font': [] }],
-      [{ 'align': [] }],
+      [{ header: 1 }, { header: 2 }],               // custom button values
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      [{ script: 'sub' }, { script: 'super' }],      // superscript/subscript
+      [{ indent: '-1' }, { indent: '+1' }],          // outdent/indent
+      [{ direction: 'rtl' }],                         // text directio
+      [{ size: ['small', false, 'large', 'huge'] }],  // custom dropdown
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ color: [] }, { background: [] }],          // dropdown with defaults from theme
+      [{ font: [] }],
+      [{ align: [] }],
       ['clean'],                                         // remove formatting button
       ['link', 'image']                         // link and image, video
     ]
@@ -72,40 +72,42 @@ export class AddNewsComponent implements OnInit {
       this.ImgSrc = event.file.response.url;
     }
     if (event.type == 'removed') {
-      console.log("removed");
-      this.http.removeImage("/web/removeImage", this.ImgSrc).subscribe((data) => {
+      console.log('removed');
+      this.http.removeImage('/web/removeImage', this.ImgSrc).subscribe((data) => {
         console.log(data);
         this.fileList1 = [];
         this.ImgSrc = null;
-      })
+      });
     }
   }
   submitNews(e) {
     console.log(this.ImgSrc);
     console.log(this.validateForm.value);
     if (this.ImgSrc == null && this.validateForm.value.tag != null) {
-      this.message.create("error", "若无照片则不能添加标签");
+      this.message.create('error', '若无照片则不能添加标签');
     }
     else {
+      // tslint:disable-next-line:max-line-length
       if (this.validateForm.value.simpletitle != null && this.validateForm.value.title != null && this.validateForm.value.inner != null && this.validateForm.value.content != null && this.validateForm.value.title != null && this.validateForm.value.press != null && this.validateForm.value.status != null) {
-        this.http.InputNewsToNewslist("/web/addNews", this.validateForm.value.simpletitle, this.validateForm.value.title, this.validateForm.value.inner, this.validateForm.value.content, this.validateForm.value.classify, this.validateForm.value.tag, this.ImgSrc, this.validateForm.value.press, this.validateForm.value.status).subscribe((data: any) => {
+        // tslint:disable-next-line:max-line-length
+        this.http.InputNewsToNewslist('/web/addNews', this.validateForm.value.simpletitle, this.validateForm.value.title, this.validateForm.value.inner, this.validateForm.value.content, this.validateForm.value.classify, this.validateForm.value.tag, this.ImgSrc, this.validateForm.value.press, this.validateForm.value.status).subscribe((data: any) => {
           console.log(data);
           if (data.status == 200) {
-            this.message.create("success", `Submit success`);
+            this.message.create('success', `Submit success`);
             this.validateForm.reset();
             console.log(this.fileList1);
             this.ImgSrc = null;
             this.fileList1 = [];
           } else {
-            this.message.create("error", `请检查新闻表单`);
+            this.message.create('error', `请检查新闻表单`);
           }
         }, (err) => {
           console.log(err);
-          this.message.create("error", `请检查新闻表单`);
-        })
+          this.message.create('error', `请检查新闻表单`);
+        });
       }
       else {
-        this.message.create("error", `required can't be null`);
+        this.message.create('error', `required can't be null`);
       }
     }
   }
