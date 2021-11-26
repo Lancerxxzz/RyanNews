@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, public http: HttpServiceService, private message: NzMessageService) { }
   validateForm!: FormGroup;
   public api: any = '/web/login';
+  public autoApi='/web/authLogin';
   public forgetTag = false;
   submitForm(): void {
     for (const i in this.validateForm.controls) {
@@ -27,11 +28,20 @@ export class LoginComponent implements OnInit {
       password: [null, [Validators.required]],
       remember: [true]
     });
-
   }
   forget() {
     this.forgetTag = true;
     this.message.create('warning', '请联系管理员Ryan');
+  }
+
+
+  ngAfterViewInit(){
+    // @ts-ignore
+    console.log('init');
+    let token=localStorage.getItem('token')
+    this.http.autoLogin(this.autoApi,token).subscribe(data=>{
+      console.log(data)
+    })
   }
 
   Login(e) {
@@ -43,6 +53,7 @@ export class LoginComponent implements OnInit {
         this.message.create('success', `Welcome ${this.validateForm.value.username}`);
         if (this.validateForm.value.remember) {
           sessionStorage.setItem('userInfo', JSON.stringify(data.userInfo));
+          localStorage.setItem('token',data.token);
         }
       }
       else {

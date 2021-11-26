@@ -30,7 +30,7 @@ export class AddSwiperComponent implements OnInit {
   // tslint:disable-next-line:typedef
   AddToSwiper(e) {
     console.log(e.newsid);
-    this.http.selectNewslistIntoSwiper(this.api, e.newsid).subscribe((data) => {
+    this.http.selectNewslistIntoSwiper(this.api, e.newsid).subscribe((data:any) => {
       // tslint:disable-next-line:triple-equals
       if (data.msg == 'success'){
         this.msg.create('success', ` Select As Swiper successed`);

@@ -1,5 +1,5 @@
 import { Injectable, SimpleChange } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders, } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders,HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { EmailValidator } from '@angular/forms';
 @Injectable({
@@ -12,19 +12,20 @@ export class HttpServiceService {
     return this.http.post(api, { "username": admin, "password": password });
   }
 
-  removeImage(api, url) {
+  removeImage(api:string, url:string) {
     return this.http.post(api, { "url": url });
   }
 
+  autoLogin(api:string,token:string) {
+    // @ts-ignore
+    var setheaders:HttpHeaders=new Headers().set('Authorization',`Bearer ${token}`);
+
+   return  this.http.post(api,token, { headers:setheaders});
+  }
 
   get(api: any, ) {
     return this.http.get(api)
   }
-
-  // IndexMore(api: any, page: any) {
-  //
-  //   return this.http.post(api, { "pageIndex": page })
-  // }
   DeleteByNewsid(api: any, newsid: String) {
 
     return this.http.post(api, { "newsid": newsid });
