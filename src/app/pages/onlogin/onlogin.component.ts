@@ -87,6 +87,7 @@ export class OnloginComponent implements OnInit {
     this.loginOut = false;
     this.router.navigate(['login']).then(() => {
       sessionStorage.removeItem('userInfo');
+      localStorage.removeItem('token');
       this.message.create('success', '成功退出系统');
     });
   }

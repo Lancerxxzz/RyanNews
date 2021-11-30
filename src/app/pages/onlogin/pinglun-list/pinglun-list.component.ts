@@ -18,28 +18,24 @@ export class PinglunListComponent implements OnInit {
   getpl(e) {
 
     console.log(e);
-    this.http.getplBynewsid('web/getplcontent', e.newsid).subscribe((data: any) => {
+    this.http.getplBynewsid('web/getplcontent', e[0].newsid).subscribe((data: any) => {
+      console.log(data)
       this.data = data;
-      console.log(data);
-      this.show = true
+      this.show = true;
     })
   }
   panelList() {
-    this.http.getpinglunnewsid('zorro/pllist').subscribe((data: any) => {
+    this.http.getpinglunnewsid('web/c_list').subscribe((data: any) => {
       console.log(data);
-      this.panels = data
+      this.panels = data;
     })
   }
   edit(e) {
-
     console.log(e);
-    this.http.deletepinglunBynewsid('zorro/deletepl', e.newsid, e.nickname, e.content).subscribe((data: any) => {
-      if (data.status == 200) {
-        this.message.create("success", `delete success`);
-        this.http.getplBynewsid('zorro/getplcontent', e.newsid).subscribe((data: any) => {
-          this.data = data;
-        })
-      }
+    this.http.deletepinglunBynewsid('web/deletepl', e.cid,e.newsid).subscribe((data: any) => {
+      console.log(data)
+      this.message.create("success", `delete success`);
+      this.data=data;
     })
   }
   onClick() { }

@@ -70,7 +70,7 @@ export class HttpServiceService {
   getplBynewsid(api, newsid) {
     return this.http.post(api, { "newsid": newsid })
   }
-  deletepinglunBynewsid(api, newsid, nickname, content) {
-    return this.http.post(api, { "newsid": newsid, "nickname": nickname, "content": content })
+  deletepinglunBynewsid(api, cid,newsid) {
+    return this.http.post(api, { "cid": cid ,"newsid":newsid})
   }
 }
