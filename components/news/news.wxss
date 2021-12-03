@@ -32,6 +32,7 @@ swiper image{
   -webkit-box-orient:vertical;
   overflow:hidden;
   color: #8B8989;
+  min-height: 96rpx;
 }
 .title{
   font-weight: bold;
@@ -57,6 +58,7 @@ swiper image{
   float: right;
   font-size: 13px;
   margin-top: 8rpx;
+  padding-bottom: 20rpx;
 }
 
 

@@ -9,7 +9,7 @@
 </swiper>
 
 <view  wx:for="{{NewsList||otherList}}"  bindtap="navigate" id="{{item.newsid}}"class="newslist" wx:key="index">
-  <van-card  >
+  <van-card   >
 <div slot="title" class="title">{{item.title}}</div>
 <div slot="tag" class="tag" wx:if="{{item.tag!=null}}">{{item.tag}}</div>
 <view slot="desc" class="desc">{{item.inner}}"</view>
