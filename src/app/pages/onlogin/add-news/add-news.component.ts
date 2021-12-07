@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NzFormTooltipIcon } from 'ng-zorro-antd/form';
 import { HttpServiceService } from '../../../service/http-service.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 
 const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
@@ -68,10 +67,12 @@ export class AddNewsComponent implements OnInit {
       classifty: ['娱乐'],
       press: [null, [Validators.required]],
       status: ['0'],
+      img: [null, [Validators.required]]
     });
 
   }
   submitForm(): void {
+    // tslint:disable-next-line:forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
@@ -80,11 +81,14 @@ export class AddNewsComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   upLoadChange(event) {
+    if (event.type == 'start'){
+
+    }
     console.log(event);
+    console.log(getBase64(event.originFileObj));
     // tslint:disable-next-line:triple-equals
     if (event.type == 'success') {
       console.log(event.file.response.url);
-      this.ImgSrc = event.file.response.url;
     }
     // tslint:disable-next-line:triple-equals
     if (event.type == 'removed') {
@@ -123,31 +127,19 @@ export class AddNewsComponent implements OnInit {
     //   else {
     //     this.message.create('error', `required can't be null`);
     //   }
-  this.isVisible=true;
+  this.isVisible = true;
   }
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
     this.fileList = [];
-    this.ImgSrc = null;
     // tslint:disable-next-line:forin
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsPristine();
       this.validateForm.controls[key].updateValueAndValidity();
     }
   }
-  handleChange(info: NzUploadChangeParam): void {
-    console.log(this.fileList);
-    if (info.file.status !== 'uploading') {
-      console.log(info.fileList[0].thumbUrl);
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      this.msg.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      this.msg.error(`${info.file.name} file upload failed.`);
-    }
-  }
+
   handlePreview = async (file: NzUploadFile): Promise<void> => {
     if (!file.url && !file.preview) {
       // tslint:disable-next-line:no-non-null-assertion
@@ -167,4 +159,17 @@ export class AddNewsComponent implements OnInit {
     this.isVisible = false;
   }
 
+  // tslint:disable-next-line:typedef
+  CustomRequest(file) {
+    console.log(file);
+    const fd = new FormData();
+    fd.append('img', file);
+    this.http.postImage('/web/addNews', fd ).subscribe((data) => {
+      console.log(data);
+      file.onSuccess();
+    }, (err) => {
+      console.log(err);
+    });
+    return undefined;
+  }
 }

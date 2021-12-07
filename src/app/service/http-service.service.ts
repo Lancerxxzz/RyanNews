@@ -45,6 +45,8 @@ export class HttpServiceService {
     return this.http.get(api);
   }
 
+
+
   // tslint:disable-next-line:typedef ban-types
   DeleteByNewsid(api: any, newsid: String) {
 
