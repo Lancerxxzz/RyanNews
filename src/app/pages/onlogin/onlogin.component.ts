@@ -17,7 +17,7 @@ export class OnloginComponent implements OnInit {
   loginOut = false;
   index: number;
   userInfo: any;
-  src: any = 'https://api.ryannews.club/wxcode.jpg';
+  src: any = 'https://api.1ancer.top/static/wxcode.jpg';
   data = [];
 
   ngOnInit(): void {

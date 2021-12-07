@@ -32,7 +32,7 @@
                         <a class="login-form-forgot" (click)="forget()">Forgot password</a>
                     </div>
                 </div>
-                <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" (click)="Login(validateForm)">Log
+                <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'"  [nzLoading]="disabled"   (click)="Login(validateForm)">Log
         in</button> Or <a [routerLink]="['/register']"> register now! </a>
             </form>
         </div>

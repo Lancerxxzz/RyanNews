@@ -17,11 +17,12 @@ export class RegisterComponent implements OnInit {
     type: 'info-circle',
     theme: 'twotone'
   };
-  confirm: boolean = false;
+  confirm = false;
 
   offsetTop = 10;
 
   submitForm(): void {
+    // tslint:disable-next-line:forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
@@ -57,25 +58,31 @@ export class RegisterComponent implements OnInit {
       agree: [true]
     });
   }
+  // tslint:disable-next-line:typedef
   register(e) {
     console.log(e.value);
+    // tslint:disable-next-line:triple-equals
     if (e.value.password == e.value.checkPassword) {
       this.http.register('/web/register', e.value.admin, e.value.password, e.value.email, e.value.phoneNumber).subscribe((data: any) => {
         console.log(data);
         if (data.status == 200) {
-          this.message.create("success", "等待管理员通过")
-          this.router.navigate(["/login"])
+          this.message.create('success', '注册成功，欢迎使用');
+          this.router.navigate(['/login']);
+        }else {
+          this.message.create('warning', '用户名或邮箱已存在');
         }
       }, (err) => {
-        this.message.create("error", "用户名已存在")
-      })
+        this.message.create('error', '服务器连接出错');
+        console.log(err);
+      });
     }
     else {
-      this.message.create("warning", "请检查注册表")
+      this.message.create('error', '请检查表单');
     }
   }
+  // tslint:disable-next-line:typedef
   back() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
 }

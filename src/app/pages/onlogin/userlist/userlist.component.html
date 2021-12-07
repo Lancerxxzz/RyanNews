@@ -1,4 +1,4 @@
-<nz-table #basicTable [nzData]="userlist">
+<nz-table #basicTable [nzData]="users">
     <thead>
         <tr>
             <th>aid</th>
@@ -8,10 +8,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of userlist;">
+        <tr *ngFor="let data of users;">
             <td>{{ data.uid }}</td>
             <td>{{ data.username }}</td>
-            <td>{{ data.password }}</td>
+            <td>*******</td>
             <td>
                 <nz-divider nzType="vertical"></nz-divider>
                 <a (click)="Delete(data)">Delete</a>

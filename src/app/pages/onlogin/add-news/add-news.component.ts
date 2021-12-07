@@ -6,6 +6,14 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadChangeParam, NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 
+const getBase64 = (file: File): Promise<string | ArrayBuffer | null> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+
 @Component({
   selector: 'app-add-news',
   templateUrl: './add-news.component.html',
@@ -13,6 +21,11 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 })
 export class AddNewsComponent implements OnInit {
 
+  // tslint:disable-next-line:max-line-length
+  constructor(private fb: FormBuilder, public http: HttpServiceService, private msg: NzMessageService, private message: NzMessageService) { }
+
+  isVisible = false;
+  uploadStatus = false;
   validateForm!: FormGroup;
   captchaTooltipIcon: NzFormTooltipIcon = {
     type: 'info-circle',
@@ -21,9 +34,9 @@ export class AddNewsComponent implements OnInit {
   public editModel = false;
   public data: any;
   public content: string;
-  Url = '/web/uploadImage';
   ImgSrc: any;
-  fileList1: NzUploadFile[] = [];
+  addNewsUrl = 'http://localhost:3000/web/addNews';
+  fileList: NzUploadFile[] = [];
   quillConfig = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -43,7 +56,8 @@ export class AddNewsComponent implements OnInit {
     ]
   };
 
-  constructor(private fb: FormBuilder, public http: HttpServiceService, private msg: NzMessageService, private message: NzMessageService) { }
+  previewImage: string | undefined = '';
+  previewVisible = false;
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -51,8 +65,7 @@ export class AddNewsComponent implements OnInit {
       title: [null, [Validators.required]],
       inner: [null, [Validators.required]],
       content: [null, [Validators.required]],
-      classify: ['娱乐'],
-      tag: [null, [Validators.required]],
+      classifty: ['娱乐'],
       press: [null, [Validators.required]],
       status: ['0'],
     });
@@ -65,64 +78,68 @@ export class AddNewsComponent implements OnInit {
     }
   }
 
+  // tslint:disable-next-line:typedef
   upLoadChange(event) {
     console.log(event);
+    // tslint:disable-next-line:triple-equals
     if (event.type == 'success') {
       console.log(event.file.response.url);
       this.ImgSrc = event.file.response.url;
     }
+    // tslint:disable-next-line:triple-equals
     if (event.type == 'removed') {
       console.log('removed');
       this.http.removeImage('/web/removeImage', this.ImgSrc).subscribe((data) => {
         console.log(data);
-        this.fileList1 = [];
+        this.fileList = [];
         this.ImgSrc = null;
       });
     }
   }
+  // tslint:disable-next-line:typedef
   submitNews(e) {
-    console.log(this.ImgSrc);
-    console.log(this.validateForm.value);
-    if (this.ImgSrc == null && this.validateForm.value.tag != null) {
-      this.message.create('error', '若无照片则不能添加标签');
-    }
-    else {
-      // tslint:disable-next-line:max-line-length
-      if (this.validateForm.value.simpletitle != null && this.validateForm.value.title != null && this.validateForm.value.inner != null && this.validateForm.value.content != null && this.validateForm.value.title != null && this.validateForm.value.press != null && this.validateForm.value.status != null) {
-        // tslint:disable-next-line:max-line-length
-        this.http.InputNewsToNewslist('/web/addNews', this.validateForm.value.simpletitle, this.validateForm.value.title, this.validateForm.value.inner, this.validateForm.value.content, this.validateForm.value.classify, this.validateForm.value.tag, this.ImgSrc, this.validateForm.value.press, this.validateForm.value.status).subscribe((data: any) => {
-          console.log(data);
-          if (data.status == 200) {
-            this.message.create('success', `Submit success`);
-            this.validateForm.reset();
-            console.log(this.fileList1);
-            this.ImgSrc = null;
-            this.fileList1 = [];
-          } else {
-            this.message.create('error', `请检查新闻表单`);
-          }
-        }, (err) => {
-          console.log(err);
-          this.message.create('error', `请检查新闻表单`);
-        });
-      }
-      else {
-        this.message.create('error', `required can't be null`);
-      }
-    }
+
+    // console.log(this.validateForm.value);
+    //   // tslint:disable-next-line:max-line-length
+    // if (this.validateForm.value.simpletitle != null && this.validateForm.value.title != null && this.validateForm.value.inner != null && this.validateForm.value.content != null && this.validateForm.value.title != null && this.validateForm.value.press != null && this.validateForm.value.status != null) {
+    //     // tslint:disable-next-line:max-line-length
+    //     this.http.InputNewsToNewslist('/web/addNews', this.validateForm).subscribe((data: any) => {
+    //       console.log(data);
+    //       // tslint:disable-next-line:triple-equals
+    //       if (data.status == 200) {
+    //         this.message.create('success', `Submit success`);
+    //         this.validateForm.reset();
+    //         console.log(this.fileList);
+    //         this.ImgSrc = null;
+    //         this.fileList = [];
+    //       } else {
+    //         this.message.create('error', `请检查新闻表单`);
+    //       }
+    //     }, (err) => {
+    //       console.log(err);
+    //       this.message.create('error', `请检查新闻表单`);
+    //     });
+    //   }
+    //   else {
+    //     this.message.create('error', `required can't be null`);
+    //   }
+  this.isVisible=true;
   }
   resetForm(e: MouseEvent): void {
     e.preventDefault();
     this.validateForm.reset();
-    this.fileList1 = [];
+    this.fileList = [];
     this.ImgSrc = null;
+    // tslint:disable-next-line:forin
     for (const key in this.validateForm.controls) {
       this.validateForm.controls[key].markAsPristine();
       this.validateForm.controls[key].updateValueAndValidity();
     }
   }
   handleChange(info: NzUploadChangeParam): void {
+    console.log(this.fileList);
     if (info.file.status !== 'uploading') {
+      console.log(info.fileList[0].thumbUrl);
       console.log(info.file, info.fileList);
     }
     if (info.file.status === 'done') {
@@ -131,6 +148,23 @@ export class AddNewsComponent implements OnInit {
       this.msg.error(`${info.file.name} file upload failed.`);
     }
   }
+  handlePreview = async (file: NzUploadFile): Promise<void> => {
+    if (!file.url && !file.preview) {
+      // tslint:disable-next-line:no-non-null-assertion
+      file.preview = await getBase64(file.originFileObj!);
+    }
+    this.previewImage = file.url || file.preview;
+    this.previewVisible = true;
+  }
 
+  handleOk(): void {
+    console.log('Button ok clicked!');
+    this.isVisible = false;
+  }
+
+  handleCancel(): void {
+    console.log('Button cancel clicked!');
+    this.isVisible = false;
+  }
 
 }

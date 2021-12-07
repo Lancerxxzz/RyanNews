@@ -1,76 +1,108 @@
 import { Injectable, SimpleChange } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders,HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { EmailValidator } from '@angular/forms';
+import { HttpClient, HttpParams, HttpHeaders, HttpInterceptor } from '@angular/common/http';
+import {FormGroup} from '@angular/forms';
+import {NzUploadFile} from 'ng-zorro-antd/upload';
+
+interface NewsEntity{
+  title: string;
+  simpletitle: string;
+  content: string;
+  inner: string;
+  status: string;
+  press: string;
+  tag: string;
+  classifty: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class HttpServiceService {
   constructor(private http: HttpClient) { }
 
-  Confirmlogin(api: any, admin: any, password: any) {
-    return this.http.post(api, { "username": admin, "password": password });
+  // tslint:disable-next-line:typedef
+  Confirmlogin(api: any, username: any, password: any) {
+    return this.http.post(api, { username,  password });
   }
 
-  removeImage(api:string, url:string) {
-    return this.http.post(api, { "url": url });
+  // tslint:disable-next-line:typedef
+  removeImage(api: string, url: string) {
+    return this.http.post(api, {  url });
   }
 
-  autoLogin(api:string,token:string) {
+  // tslint:disable-next-line:typedef
+  autoLogin(api: string, token: string) {
     // @ts-ignore
-    var setheaders:HttpHeaders=new Headers().set('Authorization',`Bearer ${token}`);
+    const setheaders: HttpHeaders = new Headers().append('Authorization', `Bearer ${token}`);
 
-   return  this.http.post(api,token, { headers:setheaders});
+    return  this.http.post(api, token, { headers: setheaders});
   }
 
+  // tslint:disable-next-line:typedef
   get(api: any, ) {
-    return this.http.get(api)
+    return this.http.get(api);
   }
+
+  // tslint:disable-next-line:typedef ban-types
   DeleteByNewsid(api: any, newsid: String) {
 
-    return this.http.post(api, { "newsid": newsid });
-  }
-  InputNewsToNewslist(api: any, simple: any, title, inner, content, classify, tag, img, press, status) {
-
-    return this.http.post(api, { "simpletitle": simple, "title": title, "inner": inner, "content": content, "classify": classify, "tag": tag, "img": img, "press": press, "status": status })
+    return this.http.post(api, {  newsid });
   }
 
+  // tslint:disable-next-line:typedef no-shadowed-variable
+  InputNewsToNewslist(api: any, NewsEntity: any) {
+
+    return this.http.post(api, { NewsEntity});
+  }
+
+  // tslint:disable-next-line:typedef
   selectNewslistIntoSwiper(api: any, newsid: any) {
 
-    return this.http.post(api, { "newsid": newsid })
+    return this.http.post(api, {  newsid });
   }
 
 
+  // tslint:disable-next-line:typedef
   changeUserInfo(api: any, admin: any, password: any, tel: any) {
 
-    return this.http.post(api, { "admin": admin, "password": password, "tel": tel })
+    return this.http.post(api, {  admin,  password,  tel });
   }
+  // tslint:disable-next-line:typedef
   postImage(api: any, file: any) {
-    return this.http.post(api, file)
+    return this.http.post(api, file);
   }
-  register(api: any, admin, password, email, tel) {
+  // tslint:disable-next-line:typedef
+  register(api: any, username, password, email, tel) {
     return this.http.post(api, {
-      "admin": admin, "password": password, "email": email, "tel": tel
-    })
+      username,  password,  email,  tel
+    });
   }
+  // tslint:disable-next-line:typedef
   GetRegister(api) {
-    return this.http.get(api)
+    return this.http.get(api);
   }
+  // tslint:disable-next-line:typedef
   confirmRegister(api, admin, password, email, tel) {
     return this.http.post(api, {
-      "admin": admin, "password": password, "email": email, "tel": tel
-    })
+       admin,  password,  email,  tel
+    });
   }
+  // tslint:disable-next-line:typedef
   DeleteUser(api, aid) {
-    return this.http.post(api, { "aid": aid })
+    return this.http.post(api, {  aid });
   }
+  // tslint:disable-next-line:typedef
   getpinglunnewsid(api) {
-    return this.http.get(api)
+    return this.http.get(api);
   }
+  // tslint:disable-next-line:typedef
   getplBynewsid(api, newsid) {
-    return this.http.post(api, { "newsid": newsid })
+    return this.http.post(api, {  newsid });
   }
-  deletepinglunBynewsid(api, cid,newsid) {
-    return this.http.post(api, { "cid": cid ,"newsid":newsid})
+  // tslint:disable-next-line:typedef
+  deletepinglunBynewsid(api, cid, newsid) {
+    return this.http.post(api, {  cid ,  newsid});
   }
 }

@@ -1,4 +1,4 @@
-<link href="https://cdn.bootcss.com/quill/2.0.0-dev.3/quill.snow.css" rel="stylesheet">
+
 <form nz-form [formGroup]="validateForm">
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="simpletitle">新闻热搜标题</nz-form-label>
@@ -21,16 +21,15 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="content" nzRequired>新闻内容</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your content!">
-            <quill-editor [style]="{height: '300px'}" formControlName="content" [modules]="quillConfig" [(ngModel)]="content" placeholder="请输入新闻内容">
-            </quill-editor>
+        <nz-form-label [nzSm]="6" [nzXs]="48" nzFor="content" nzRequired>新闻内容</nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="48" nzErrorTip="Please input your content!">
+          <quill-editor [style]="{height:'300px'}" formControlName="content" [modules]="quillConfig" [(ngModel)]="content" placeholder="请输入新闻内容"></quill-editor>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>新闻类别</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['classify']" nzErrorTip="Please select news classify">
-            <nz-select formControlName="classify" class="classify-select">
+        <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['classifty']" nzErrorTip="Please select news classify">
+            <nz-select formControlName="classifty" class="classify-select">
                 <nz-option nzLabel="娱乐" nzValue="娱乐"></nz-option>
                 <nz-option nzLabel="国际" nzValue="国际"></nz-option>
                 <nz-option nzLabel="科技" nzValue="科技"></nz-option>
@@ -40,22 +39,7 @@
             </nz-select>
         </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tag">新闻标签</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-            <input nz-input type="text" id="tag" formControlName="tag" />
-        </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24">新闻图片</nz-form-label>
-        <nz-form-control [nzSm]="14" [nzXs]="24">
-            <div class="clearfix">
-                <nz-upload [nzAction]="Url" nzListType="picture" (nzChange)="upLoadChange($event)" [nzFileList]="fileList1" [nzShowButton]="fileList1.length<1">
-                    <button nz-button type="button"><i nz-icon nzType="upload"></i>Upload</button>
-                </nz-upload>
-            </div>
-        </nz-form-control>
-    </nz-form-item>
+
     <nz-form-item>
         <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="press">作者</nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid press!">
@@ -76,8 +60,15 @@
 
     <nz-form-item nz-row class="register-area">
         <nz-form-control [nzSpan]="14" [nzOffset]="6">
-            <button nz-button nzType="primary" type="submit" (click)="submitNews($event)">submit</button>
-            <button nz-button (click)="resetForm($event)">reset</button>
+            <button nz-button nzType="primary" type="submit" (click)="submitNews($event)">发布新闻</button>
+            <button nz-button (click)="resetForm($event)">重置新闻发布单</button>
         </nz-form-control>
     </nz-form-item>
 </form>
+
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="为你的新闻选个封面吧" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzCancelText="不了" [nzOkLoading]="uploadStatus" nzOkText="上传封面">
+  <ng-container *nzModalContent>
+    
+  </ng-container>
+</nz-modal>
