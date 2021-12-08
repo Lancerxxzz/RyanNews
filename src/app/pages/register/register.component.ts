@@ -53,8 +53,8 @@ export class RegisterComponent implements OnInit {
       email: [null, [Validators.email, Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      admin: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.required]],
+      username: [null, [Validators.required]],
+      tel: [null, [Validators.required]],
       agree: [true]
     });
   }
@@ -63,8 +63,9 @@ export class RegisterComponent implements OnInit {
     console.log(e.value);
     // tslint:disable-next-line:triple-equals
     if (e.value.password == e.value.checkPassword) {
-      this.http.register('/web/register', e.value.admin, e.value.password, e.value.email, e.value.phoneNumber).subscribe((data: any) => {
+      this.http.register('/web/register', e.value.username, e.value.password, e.value.email, e.value.tel).subscribe((data: any) => {
         console.log(data);
+        // tslint:disable-next-line:triple-equals
         if (data.status == 200) {
           this.message.create('success', '注册成功，欢迎使用');
           this.router.navigate(['/login']);

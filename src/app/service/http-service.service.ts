@@ -54,9 +54,9 @@ export class HttpServiceService {
   }
 
   // tslint:disable-next-line:typedef no-shadowed-variable
-  InputNewsToNewslist(api: any, NewsEntity: any) {
+  InputNewsToNewslist(api: any, NewsEntity: any, img: NzUploadFile) {
 
-    return this.http.post(api, { NewsEntity});
+    return this.http.post(api, { NewsEntity, img});
   }
 
   // tslint:disable-next-line:typedef

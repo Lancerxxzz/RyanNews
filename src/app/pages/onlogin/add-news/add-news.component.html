@@ -56,25 +56,25 @@
             </nz-select>
         </nz-form-control>
     </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="img">新闻封面</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid status!" >
-      <div class="clearfix" >
-        <nz-upload
-          nzListType="picture"
-          [(nzFileList)]="fileList"
-          [nzShowButton]="fileList.length<1"
-          [nzAccept]="['image/jpeg','image/png']"
-          [nzCustomRequest]="CustomRequest"
-        >
-          <button nz-button>
-            <i nz-icon nzType="upload"></i>
-            上传封面
-          </button>
-        </nz-upload>
-      </div>
-    </nz-form-control>
-  </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" >新闻封面</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <div class="clearfix" >
+          <nz-upload
+            nzListType="picture"
+            [(nzFileList)]="fileList"
+            [nzShowButton]="fileList.length<1"
+            [nzAccept]="['image/jpeg','image/png']"
+            [nzBeforeUpload]="beforeUpload"
+          >
+            <button nz-button>
+              <i nz-icon nzType="upload"></i>
+              上传封面
+            </button>
+          </nz-upload>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
 
 
     <nz-form-item nz-row class="register-area">
@@ -84,28 +84,4 @@
         </nz-form-control>
     </nz-form-item>
 </form>
-
-
-<!--<nz-modal [(nzVisible)]="isVisible"  [nzContent]="modalContent" nzTitle="为你的新闻选个封面吧" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()" nzCancelText="不上传封面直接发布" [nzOkLoading]="uploadStatus" nzOkText="上传封面">-->
-<!--  <ng-template #modalContent>-->
-<!--    <nz-upload-->
-<!--      nzType="drag"-->
-<!--      [nzMultiple]="false"-->
-<!--      nzLimit="1"-->
-<!--      nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"-->
-<!--      (nzChange)="handleChange($event)"-->
-<!--      [nzFileList]="fileList"-->
-<!--      [nzPreview]="handlePreview"-->
-<!--    >-->
-<!--      <p class="ant-upload-drag-icon">-->
-<!--        <i nz-icon nzType="inbox"></i>-->
-<!--      </p>-->
-<!--      <p class="ant-upload-text">拖拽或点击上传文件</p>-->
-<!--      <p class="ant-upload-hint">-->
-<!--        只支持jpeg/png格式单文件上传-->
-<!--      </p>-->
-<!--    </nz-upload>-->
-
-<!--  </ng-template>-->
-<!--</nz-modal>-->
 

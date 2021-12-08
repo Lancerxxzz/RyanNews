@@ -6,11 +6,11 @@
     </nz-affix>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
       <nz-form-item>
-        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="admin" nzRequired nzTooltipTitle="What do you want other to call you">
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="username" nzRequired nzTooltipTitle="What do you want other to call you">
           <span>Nickname</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
-          <input nz-input id="admin" formControlName="admin" />
+          <input nz-input id="admin" formControlName="username" />
         </nz-form-control>
       </nz-form-item>
         <nz-form-item>
@@ -41,9 +41,9 @@
         </nz-form-item>
 
         <nz-form-item>
-            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+            <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="tel" nzRequired>Phone Number</nz-form-label>
             <nz-form-control [nzSm]="14" [nzXs]="24" [nzValidateStatus]="validateForm.controls['phoneNumber']" nzErrorTip="Please input your phone number!">
-                <input formControlName="phoneNumber" id="'phoneNumber'" nz-input maxlength="11" type="tel" />
+                <input formControlName="tel" id="'tel'" nz-input maxlength="11" type="tel" />
             </nz-form-control>
         </nz-form-item>
 
