@@ -17,7 +17,7 @@
 <view  wx:for="{{mine_collection}}"  class="newslist" wx:key="*this" >
   <van-swipe-cell right-width="{{65}}" async-close  bind:close="onClose" id="{{item.newsid}}" >
    <van-cell-group >
-        <van-card   tag="{{item.tag}}"id="{{item.newsid}}" bindtap="navigator" >
+        <van-card id="{{item.newsid}}" bindtap="navigator" >
         <div slot="title" class="title">{{item.title}}--{{index}}</div>
 
         <view slot="desc" class="desc">{{item.inner}}"</view>

@@ -13,3 +13,12 @@ page{
   white-space: nowrap;
   font-size: 30rpx;
 }
+.first{
+  color: red;
+}
+.second{
+  color: rgb(236, 38, 38);
+}
+.third{
+  color: rgb(226, 105, 105);
+}

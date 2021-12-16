@@ -24,16 +24,13 @@ pageshow(){
   wx.request({
     url: app.globalData.url+'/wx/index',
     method:'GET',
-    dataType:'json',
-    header:{"Content-Type":"application/json"},
     success:res=>{
       console.log(res.data);
       that.setData({
             NewsList:res.data[0],
             swiper:res.data[1],
-            //videoList:res.data[2],
             ad:res.data[2].content
-        })
+        });
     }
   })
 },
@@ -41,29 +38,32 @@ pageshow(){
   onReachBottom(){
     var  that=this;
       if(that.data.page==0){
+        if(that.data.index!=1){
+          wx.showLoading({
+            title: '正在努力加载...',
+            icon:"loading",
+            mask:true
+          })
+        }
         wx.request({
           url: app.globalData.url+'/wx/indexmore',
           method:'GET',
-          data:{
-            index:that.data.index
-          },
+          data:{index:that.data.index},
           dataType:'json',
           header:{"Content-Type":"application/json"},
           success:res=>{
             console.log(res);
+            wx.hideLoading();
             if(res.data[0].length==0){
               wx.showToast({
                 title: '全部加载完啦！',
-                icon:"success"
-              })
+                icon:"success",
+                mask:true
+              });
               that.setData({
                 show:true
-              })
+              });
             }else{
-              wx.showToast({
-                title: '正在努力加载...',
-                icon:"loading"
-              })
               var List=that.data.NewsList.concat(res.data[0])
               that.setData({
                 NewsList:List,
@@ -74,6 +74,13 @@ pageshow(){
         })
       }
       else{
+        if(that.data.OtherIndex!=1){
+          wx.showLoading({
+            title: '正在努力加载...',
+            icon:"loading",
+            mask:true
+          });
+        }
         wx.request({
           url: app.globalData.url+'/wx/otherMore',
           method:'GET',
@@ -81,28 +88,19 @@ pageshow(){
             OtherIndex:that.data.index,
             classifty:that.data.classifty
           },
-          // dataType:'json',
-          // header:{"Content-Type":"application/json"},
           success:res=>{
             console.log(res);
+            wx.hideLoading();
             if(res.data[0].length==0){
-              wx.showToast({
-                title: '全部加载完啦！',
-                icon:"success"
-              })
               that.setData({
                 show1:true
-              })
+              });
             }else{
-              wx.showToast({
-                title: '正在努力加载...',
-                icon:"loading"
-              })
               var List=that.data.NewsList.concat(res.data[0])
               that.setData({
                 NewsList:List,
                 index:that.data.index+1
-              })
+              });
             }
           }
         })
@@ -114,7 +112,7 @@ pageshow(){
       key: 'bgc',
       success:res=>{
         console.log(res.data); 
-      wx.setNavigationBarColor({
+          wx.setNavigationBarColor({
                 frontColor: '#ffffff', // 必写项
                 backgroundColor: `${res.data}`, // 传递的颜色值
                 animation: { // 可选项，加上这项会有个显示的动画效果
@@ -126,24 +124,27 @@ pageshow(){
     })
   },
   onChange(e){
-    this.setData({
+    var that=this;
+    that.setData({
       page:e.detail.index,
       OtherIndex:1,
       classifty:e.detail.title
-    })
-    var classifty=e.detail.title
-    console.log(classifty);
-    wx.request({
-      url: app.globalData.url+'/wx/TagChange',
-      method:"POST",
-      data:{
-        tabTag:e.detail.title
-      },
-      success:res=>{
-        this.setData({
-          otherList:res.data
+    });
+    wx.showLoading({
+      title: '正在努力加载新闻>_<',
+      success:()=>{
+        wx.request({
+          url: app.globalData.url+'/wx/TagChange',
+          method:"POST",
+          data:{tabTag:e.detail.title},
+          success:res=>{
+            that.setData({
+              otherList:res.data
+            })
+            wx.hideLoading({});
+          } 
         })
-      } 
+      }
     })
   }
 })

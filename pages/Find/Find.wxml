@@ -4,7 +4,7 @@
 
 <van-search
   value="{{ value }}"
-  placeholder="搜索你关心的"
+  placeholder="搜索你想了解的"
   bind:focus="onFocus"
   shape="round"
   bind:blur="onBlur"
@@ -17,7 +17,7 @@
 
 
 <view wx:if="{{!show}}">
-  <view wx:for="{{result0}}" id="{{item.newsid}}" bindtap="navigatorTocontent"  wx:key="index">
+  <view wx:for="{{result0}}" id="{{item.newsid}}"  bindtap="navigatorTocontent"  wx:key="index">
         <van-panel >
           <view slot="header" style="height:80rpx;line-height:80rpx" >
             <div style="float:left;margin:0 30rpx;color:#EE7942;width:30rpx" >{{index+1}}</div>
@@ -56,15 +56,13 @@
     <view wx:for="{{result1}}"  id="{{item.newsid}}" bindtap="navigatorTocontent" wx:key="index">
         <van-panel>
           <view slot="header" style="height:80rpx;line-height:80rpx;" >
-            <div style="float:left;margin:0 20rpx;color:#EE7942;width:20rpx" >{{index+1}}</div>
+            <div style="float:left;margin:0 20rpx;width:20rpx; font-weight: bold;" class="{{index==0?'first':index==1?'second':index==2?'third':''}}" >{{index+1}}</div>
             <div slot="title" class="title">
                 <div style="float:left;">{{item.simpletitle}}</div>
                 <div style="float:left;margin-left:30rpx;color:#CDC5BF">{{item.ydNum}}</div>
             </div>
             <div style="float:right;margin-right:20rpx" slot="status"  >
-              <van-tag wx:if="{{item.status==0}}"></van-tag>
-              <van-tag wx:if="{{item.status==1}}" type="danger ">热</van-tag>
-              <van-tag wx:if="{{item.status==2}}" type="primary">新</van-tag>
+              <van-tag type="{{item.status==1?'danger':item.status==2?'primary':''}}" >{{item.status==0?'':item.status==1?'热':'新'}}</van-tag>
             </div>
           </view>
         </van-panel>
@@ -75,15 +73,13 @@
     <view wx:for="{{result2}}"   id="{{item.newsid}}" bindtap="navigatorTocontent" wx:key="index">
         <van-panel  >
           <view slot="header" style="height:80rpx;line-height:80rpx" >
-            <div style="float:left;margin:0 20rpx;color:#EE7942;width:20rpx" >{{index+1}}</div>
+            <div style="float:left;margin:0 20rpx;width:20rpx; font-weight: bold;" class="{{index==0?'first':index==1?'second':index==2?'third':''}}" >{{index+1}}</div>
             <div slot="title" class="title"  >
                 <div style="float:left;">{{item.simpletitle}}</div>
                 <div style="float:left;margin-left:40rpx;color:#CDC5BF">{{item.good}}</div>
             </div>
             <div style="float:right;margin-right:20rpx" slot="status">
-              <van-tag wx:if="{{item.status==0}}"></van-tag>
-              <van-tag wx:if="{{item.status==1}}" type="danger ">热</van-tag>
-              <van-tag wx:if="{{item.status==2}}" type="primary">新</van-tag>
+              <van-tag type="{{item.status==1?'danger':item.status==2?'primary':''}}" >{{item.status==0?'':item.status==1?'热':'新'}}</van-tag>
             </div>
           </view>
         </van-panel>
