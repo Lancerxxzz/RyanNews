@@ -114,6 +114,7 @@ export class AddNewsComponent implements OnInit {
           // tslint:disable-next-line:triple-equals
           if (data.status == 200){
             this.fileList = [];
+            this.validateForm.reset();
             this.msg.success('upload successfully.');
           }
 
